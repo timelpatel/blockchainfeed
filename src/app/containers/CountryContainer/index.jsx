@@ -1,31 +1,32 @@
 import React, {Component} from 'react'
 import {bindActionCreators} from 'redux'
 import {connect} from 'react-redux'
-import {selectBlockchain} from '../../actions/index.js'
+import {fetchBitcoin} from '../../actions/bitcoin.js'
 
 
 class CountryContainer extends Component {
 
-    createListItems() {
-        return this.props.bitcoin.map((bit) => {
-            return (
-                <div
-                    key={bit.id}
-                >
-                    <p>1 DigitalCurrency</p>
-                    <p
-                        onClick={() => this.props.selectBlockchain(bit.id)}>
-                            {bit.id} {bit.symbol} {bit.market_price_usd}
-                    </p>
-                </div>
-            )
-        })
+    componentDidMount() {
+        this.props.fetchBitcoin()
     }
 
     render() {
+        let bit = null
+
+        if (this.props.bitcoin.isFetching) {
+            bit = <p>Loading Bitcoin data...</p>
+        }
+        if (this.props.bitcoin.isComplete) {
+            bit = <p>{this.props.bitcoin.bitcoin.bpi.GBP.code} {this.props.bitcoin.bitcoin.bpi.GBP.rate}</p>
+        }
+        if (this.props.bitcoin.isError) {
+            bit = <p>Bitcoin data not available. Please reload.</p>
+        }
+
         return (
             <div>
-                {this.createListItems()}
+                <p>1 Bitcoin</p>
+                {bit}
             </div>
         )
     }
@@ -35,12 +36,15 @@ class CountryContainer extends Component {
 
 function mapStateToProps(state) {
     return {
-        bitcoin: state.bitcoin
+        bitcoin: state.bitcoin,
+        isComplete: state.isComplete,
+        isError: state.isError,
+        isFetching: state.isFetching
     }
 }
 
 function matchDispatchToProps(dispatch) {
-    return bindActionCreators({selectBlockchain: selectBlockchain}, dispatch)
+    return bindActionCreators({fetchBitcoin: fetchBitcoin}, dispatch)
 }
 
 
