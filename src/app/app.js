@@ -2,12 +2,13 @@ import React from 'react'
 import ReactDOM from 'react-dom'
 import {Provider} from 'react-redux'
 import store from './store.js'
+import Header from './components/Header/index.jsx'
 import ExchangeRate from './components/ExchangeRate/index.jsx'
 
 
 const App = () => (
     <div>
-        <h1>Blockchain</h1>
+        <Header />
         <ExchangeRate />
     </div>
 )

@@ -2,6 +2,7 @@ import React, {Component} from 'react'
 import {bindActionCreators} from 'redux'
 import {connect} from 'react-redux'
 import {fetchBitcoin} from '../../actions/bitcoin.js'
+import style from './style.js'
 
 
 class CountryContainer extends Component {
@@ -17,16 +18,16 @@ class CountryContainer extends Component {
             bit = <p>Loading Bitcoin data...</p>
         }
         if (this.props.bitcoin.isComplete) {
-            bit = <p>{this.props.bitcoin.bitcoin.bpi.GBP.code} {this.props.bitcoin.bitcoin.bpi.GBP.rate}</p>
+            bit = <span>{this.props.bitcoin.bitcoin.bpi.GBP.code} {this.props.bitcoin.bitcoin.bpi.GBP.rate}</span>
         }
         if (this.props.bitcoin.isError) {
-            bit = <p>Bitcoin data not available. Please reload.</p>
+            bit = <p>Bitcoin data not available.</p>
         }
 
         return (
             <div>
-                <p>1 Bitcoin</p>
-                {bit}
+                <p style={style.bodyCopy}>1 Bitcoin</p>
+                <p style={style.bodyCopy}>{bit}</p>
             </div>
         )
     }
