@@ -5,7 +5,7 @@ import {fetchBitcoin} from '../../actions/bitcoin.js'
 import style from './style.js'
 
 
-class CountryContainer extends Component {
+class BitcoinData extends Component {
 
     componentDidMount() {
         this.props.fetchBitcoin()
@@ -15,13 +15,13 @@ class CountryContainer extends Component {
         let bit = null
 
         if (this.props.bitcoin.isFetching) {
-            bit = <p>Loading Bitcoin data...</p>
+            bit = <span>Loading Bitcoin data...</span>
         }
         if (this.props.bitcoin.isComplete) {
             bit = <span>{this.props.bitcoin.bitcoin.bpi.GBP.code} {this.props.bitcoin.bitcoin.bpi.GBP.rate}</span>
         }
         if (this.props.bitcoin.isError) {
-            bit = <p>Bitcoin data not available.</p>
+            bit = <span>Bitcoin data not available.</span>
         }
 
         return (
@@ -49,4 +49,4 @@ function matchDispatchToProps(dispatch) {
 }
 
 
-export default connect(mapStateToProps, matchDispatchToProps)(CountryContainer)
+export default connect(mapStateToProps, matchDispatchToProps)(BitcoinData)

@@ -3,13 +3,13 @@ import ReactDOM from 'react-dom'
 import {Provider} from 'react-redux'
 import store from './store.js'
 import Header from './components/Header/index.jsx'
-import ExchangeRate from './components/ExchangeRate/index.jsx'
+import ExchangeRates from './components/ExchangeRates/index.jsx'
 
 
 const App = () => (
     <div>
         <Header />
-        <ExchangeRate />
+        <ExchangeRates />
     </div>
 )
 
