@@ -12319,11 +12319,7 @@ var BitcoinData = function (_Component) {
             var bit = null;
 
             if (this.props.bitcoin.isFetching) {
-                bit = _react2.default.createElement(
-                    'span',
-                    null,
-                    'Loading Bitcoin data...'
-                );
+                bit = 'Loading Bitcoin data...';
             }
             if (this.props.bitcoin.isComplete) {
                 bit = _react2.default.createElement(
@@ -12335,11 +12331,7 @@ var BitcoinData = function (_Component) {
                 );
             }
             if (this.props.bitcoin.isError) {
-                bit = _react2.default.createElement(
-                    'span',
-                    null,
-                    'Bitcoin data not available.'
-                );
+                bit = 'Bitcoin data not available.';
             }
 
             return _react2.default.createElement(

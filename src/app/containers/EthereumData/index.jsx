@@ -15,13 +15,13 @@ class EthereumData extends Component {
         let eth = null
 
         if (this.props.ethereum.isFetching) {
-            eth = <span>Loading Ethereum data...</span>
+            eth = 'Loading Ethereum data...'
         }
         if (this.props.ethereum.isComplete) {
             eth = <span>{this.props.ethereum.ethereum.symbol} {this.props.ethereum.ethereum.price.usd}</span>
         }
         if (this.props.ethereum.isError) {
-            eth = <span>Ethereum data not available.</span>
+            eth = 'Ethereum data not available.'
         }
 
         return (

@@ -15,13 +15,13 @@ class BitcoinData extends Component {
         let bit = null
 
         if (this.props.bitcoin.isFetching) {
-            bit = <span>Loading Bitcoin data...</span>
+            bit = 'Loading Bitcoin data...'
         }
         if (this.props.bitcoin.isComplete) {
             bit = <span>{this.props.bitcoin.bitcoin.bpi.GBP.code} {this.props.bitcoin.bitcoin.bpi.GBP.rate}</span>
         }
         if (this.props.bitcoin.isError) {
-            bit = <span>Bitcoin data not available.</span>
+            bit = 'Bitcoin data not available.'
         }
 
         return (
