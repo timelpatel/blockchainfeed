@@ -3,7 +3,7 @@ import style from './style.js'
 
 
 const Header = () => (
-    <header>
+    <header style={style.header}>
         <h1 style={style.h1}>Blockchain</h1>
     </header>
 )

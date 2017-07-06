@@ -1,14 +1,14 @@
 import React, {Component} from 'react'
 import {bindActionCreators} from 'redux'
 import {connect} from 'react-redux'
-import {fetchBitcoin} from '../../actions/bitcoin.js'
+import {fetchBitcoinHistorical} from '../../actions/bitcoin.js'
 import style from './style.js'
 
 
-class BitcoinData extends Component {
+class BitcoinHistoricalData extends Component {
 
     componentDidMount() {
-        this.props.fetchBitcoin()
+        this.props.fetchBitcoinHistorical()
     }
 
     render() {
@@ -18,16 +18,15 @@ class BitcoinData extends Component {
             bit = 'Loading Bitcoin data...'
         }
         if (this.props.bitcoin.isComplete) {
-            bit = <span>&#36;{this.props.bitcoin.bitcoin.bpi.USD.rate}</span>
+            bit = <span>{this.props.bitcoin.bitcoin.time.updated}</span>
         }
         if (this.props.bitcoin.isError) {
             bit = 'Bitcoin data not available.'
         }
 
         return (
-            <div style={style.blockCurrency}>
-                <p style={style.bodyCopy}>1 Bitcoin</p>
-                <p style={style.currencyValue}>{bit}</p>
+            <div>
+                <p style={style.bodyCopy}>{bit}</p>
             </div>
         )
     }
@@ -45,8 +44,8 @@ function mapStateToProps(state) {
 }
 
 function matchDispatchToProps(dispatch) {
-    return bindActionCreators({fetchBitcoin: fetchBitcoin}, dispatch)
+    return bindActionCreators({fetchBitcoinHistorical: fetchBitcoinHistorical}, dispatch)
 }
 
 
-export default connect(mapStateToProps, matchDispatchToProps)(BitcoinData)
+export default connect(mapStateToProps, matchDispatchToProps)(BitcoinHistoricalData)

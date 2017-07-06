@@ -1,9 +1,12 @@
 const style = {
     h1: {
-        color: '#363636',
+        color: '#ffffff',
         fontFamily: 'verdana',
-        fontSize: 20,
-        marginBottom: 20
+        fontSize: 20
+    },
+    header: {
+        background: '#333333',
+        padding: 20
     }
 }
 

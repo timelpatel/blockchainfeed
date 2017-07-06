@@ -1,22 +1,28 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
-import {Provider} from 'react-redux'
+import { BrowserRouter } from 'react-router-dom'
+import Routes from './routes.js'
+import createBrowserHistory from 'history/createBrowserHistory'
+import { Provider } from 'react-redux'
 import store from './store.js'
 import Header from './components/Header/index.jsx'
-import ExchangeRates from './components/ExchangeRates/index.jsx'
 
+
+const customHistory = createBrowserHistory()
 
 const App = () => (
     <div>
         <Header />
-        <ExchangeRates />
+        <Routes />
     </div>
 )
 
 
 ReactDOM.render(
-    <Provider store={store}>
-        <App />
-    </Provider>,
+    <BrowserRouter history={customHistory}>
+        <Provider store={store}>
+            <App />
+        </Provider>
+    </BrowserRouter>,
     document.getElementById('app')
 );

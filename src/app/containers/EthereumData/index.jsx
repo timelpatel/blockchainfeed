@@ -18,16 +18,16 @@ class EthereumData extends Component {
             eth = 'Loading Ethereum data...'
         }
         if (this.props.ethereum.isComplete) {
-            eth = <span>{this.props.ethereum.ethereum.symbol} {this.props.ethereum.ethereum.price.usd}</span>
+            eth = <span>&#36;{this.props.ethereum.ethereum.price.usd}</span>
         }
         if (this.props.ethereum.isError) {
             eth = 'Ethereum data not available.'
         }
 
         return (
-            <div>
+            <div style={style.blockCurrency}>
                 <p style={style.bodyCopy}>1 Ethereum</p>
-                <p style={style.bodyCopy}>{eth}</p>
+                <p style={style.currencyValue}>{eth}</p>
             </div>
         )
     }
