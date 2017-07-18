@@ -7,7 +7,7 @@ import style from './style.js'
 
 class BitcoinHistoricalData extends Component {
 
-    componentDidMount() {
+    componentWillMount() {
         this.props.fetchBitcoinHistorical()
     }
 
@@ -15,19 +15,17 @@ class BitcoinHistoricalData extends Component {
         let bit = null
 
         if (this.props.bitcoin.isFetching) {
-            bit = 'Loading Bitcoin data...'
+            bit = 'Loading Bitcoin history...'
         }
         if (this.props.bitcoin.isComplete) {
-            bit = <span>{this.props.bitcoin.bitcoin.time.updated}</span>
+            bit = 1
         }
         if (this.props.bitcoin.isError) {
-            bit = 'Bitcoin data not available.'
+            bit = 'Bitcoin history not available.'
         }
 
         return (
-            <div>
-                <p style={style.bodyCopy}>{bit}</p>
-            </div>
+            <div>DELETE THIS COMPONENT???</div>
         )
     }
 
@@ -36,7 +34,7 @@ class BitcoinHistoricalData extends Component {
 
 function mapStateToProps(state) {
     return {
-        bitcoin: state.bitcoin,
+        BitcoinHistorical: state.BitcoinHistorical,
         isComplete: state.isComplete,
         isError: state.isError,
         isFetching: state.isFetching

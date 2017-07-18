@@ -7,9 +7,21 @@ import style from './style.js'
 
 const ExchangeRates = () => (
     <div style={style.blockExchangeRate}>
-        <h2 style={style.h2}>Exchange Rates</h2>
-        <Link to='/bitcoin'><BitcoinData /></Link>
-        <Link to='/ethereum'><EthereumData /></Link>
+        <h2 style={style.blockExchangeRate__h2}>Exchange Rates</h2>
+
+        <Link
+            style={style.link}
+            to='/bitcoin'
+        >
+            <BitcoinData />
+        </Link>
+
+        <Link
+            style={style.link}
+            to='/ethereum'
+        >
+            <EthereumData />
+        </Link>
     </div>
 )
 

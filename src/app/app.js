@@ -1,6 +1,6 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
-import { BrowserRouter } from 'react-router-dom'
+import { HashRouter } from 'react-router-dom' // use BrowserRouter instead ???
 import Routes from './routes.js'
 import createBrowserHistory from 'history/createBrowserHistory'
 import { Provider } from 'react-redux'
@@ -19,10 +19,10 @@ const App = () => (
 
 
 ReactDOM.render(
-    <BrowserRouter history={customHistory}>
+    <HashRouter history={customHistory}>
         <Provider store={store}>
             <App />
         </Provider>
-    </BrowserRouter>,
+    </HashRouter>,
     document.getElementById('app')
 );

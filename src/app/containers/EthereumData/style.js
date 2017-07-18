@@ -7,12 +7,10 @@ const style = {
     bodyCopy: {
         color: '#363636',
         fontSize: 12,
-        fontWeight: 'bold',
         lineHeight: 2
     },
-    currencyValue: {
-        color: '#666666',
-        fontSize: 15
+    bold: {
+        fontWeight: 'bold'
     }
 }
 

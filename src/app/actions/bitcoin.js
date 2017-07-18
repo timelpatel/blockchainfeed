@@ -32,6 +32,7 @@ export function fetchBitcoinHistorical() {
         dispatch({type: "FETCH_BITCOIN_HISTORICAL"});
 
         axios.get('http://localhost:3030/_stub/bitcoin-historical-data-static.json')
+        // axios.get('http://localhost:3030/_stub/bitcoin-historical-data-static.csv')
         // axios.get('http://api.coindesk.com/v1/bpi/historical/close.json?start=2017-01-01&end=2017-01-31')
             .then((response) => {
                 dispatch({

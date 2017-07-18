@@ -5,7 +5,7 @@ import style from './style.js'
 
 const EthereumPage = () => (
     <div style={style.page}>
-        <h2 style={style.h2}>Etheteum</h2>
+        <h2 style={style.h2}>Etheteum (ETC)</h2>
         <EthereumData />
     </div>
 )

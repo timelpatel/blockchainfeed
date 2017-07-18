@@ -1,5 +1,6 @@
 export default function reducer(state={
     bitcoin: {},
+    bitcoinHistorical: {},
     isComplete: false,
     isError: false,
     isFetching: false
@@ -54,7 +55,7 @@ export default function reducer(state={
                 state,
                 isFetching: false,
                 isComplete: true,
-                bitcoin: action.payload
+                bitcoinHistorical: action.payload
             })
             break;
     }
