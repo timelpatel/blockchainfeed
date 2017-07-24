@@ -1,6 +1,7 @@
 const style = {
     blockCurrency: {
-        background: '#ffffff',
+        background: '#efefef',
+        borderRadius: 6,
         marginBottom: 20,
         padding: 20
     },

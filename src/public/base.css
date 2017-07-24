@@ -50,9 +50,10 @@ table {
 
 
 /*
-    Blockchain global styles
+    global styles
 */
 body {
-    background: #efefef;
+    background: #fff;
     font-family: verdana;
+    min-width: 480px;
 }

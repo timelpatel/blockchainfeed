@@ -12,34 +12,27 @@ class BitcoinData extends Component {
     }
 
     render() {
-        let bit = null
-
-        if (this.props.bitcoin.isFetching) {
-            bit = <p style={style.bodyCopy}>Loading Bitcoin data...</p>
-        }
-        if (this.props.bitcoin.isComplete) {
-            bit = (
-                <div>
-                    {/* <p style={{...style.bodyCopy, ...style.bold}}>1 Bitcoin</p> */}
-                    <p style={Object.assign({}, style.bodyCopy, style.bold)}>1 Bitcoin</p>
-                    <p style={style.bodyCopy}>&#36;{this.props.bitcoin.bitcoin.bpi.USD.rate}</p>
-                    <p style={style.bodyCopy}>&pound;{this.props.bitcoin.bitcoin.bpi.GBP.rate}</p>
-                </div>
-            )
-        }
-        if (this.props.bitcoin.isError) {
-            bit = <p style={style.bodyCopy}>Bitcoin data not available.</p>
-        }
-
         return (
-            <div style={style.blockCurrency}>{bit}</div>
+            <div style={style.blockCurrency}>
+
+                {this.props.bitcoin.isFetching && <p style={style.bodyCopy}>Loading...</p>}
+                {this.props.bitcoin.isError && <p style={style.bodyCopy}>Data not available.</p>}
+                {this.props.bitcoin.isComplete &&
+                    <div>
+                        <p style={Object.assign({}, style.bodyCopy, style.bold)}>1 Bitcoin</p>
+                        <p style={style.bodyCopy}>&#36;{this.props.bitcoin.bitcoin.bpi.USD.rate}</p>
+                        <p style={style.bodyCopy}>&pound;{this.props.bitcoin.bitcoin.bpi.GBP.rate}</p>
+                    </div>
+                }
+
+            </div>
         )
     }
 
 }
 
 
-function mapStateToProps(state) {
+const mapStateToProps = (state) => {
     return {
         bitcoin: state.bitcoin,
         isComplete: state.isComplete,
@@ -48,7 +41,7 @@ function mapStateToProps(state) {
     }
 }
 
-function matchDispatchToProps(dispatch) {
+const matchDispatchToProps = (dispatch) => {
     return bindActionCreators({fetchBitcoin: fetchBitcoin}, dispatch)
 }
 

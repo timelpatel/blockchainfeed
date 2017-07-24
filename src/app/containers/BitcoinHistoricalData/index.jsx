@@ -32,7 +32,7 @@ class BitcoinHistoricalData extends Component {
 }
 
 
-function mapStateToProps(state) {
+const mapStateToProps = (state) => {
     return {
         BitcoinHistorical: state.BitcoinHistorical,
         isComplete: state.isComplete,
@@ -41,7 +41,7 @@ function mapStateToProps(state) {
     }
 }
 
-function matchDispatchToProps(dispatch) {
+const matchDispatchToProps = (dispatch) => {
     return bindActionCreators({fetchBitcoinHistorical: fetchBitcoinHistorical}, dispatch)
 }
 
