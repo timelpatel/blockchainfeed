@@ -21,48 +21,36 @@ class Calculator extends Component {
         this.updateSelectMoney = this.updateSelectMoney.bind(this)
     }
 
-    // componentDidMount() {
-    //     this.props.fetchBitcoin()
-    // }
-
     updateMoney(event) {
         this.setState({
-            numberCrypto: (parseFloat(event.target.value)).toFixed(2),
-            numberMoney: (parseFloat(this.props.bitcoin.bitcoin.bpi.USD.rate.replace(/,/g, '')) * event.target.value).toFixed(2)
+            numberCrypto: event.target.value,
+            numberMoney: (this.props.bitcoinUsdFloatRate * event.target.value).toFixed(2)
         })
     }
 
     updateCrypto(event) {
         this.setState({
-            numberMoney: (parseFloat(event.target.value)).toFixed(2),
-            numberCrypto: (parseFloat(event.target.value) / (this.props.bitcoin.bitcoin.bpi.USD.rate.replace(/,/g, ''))).toFixed(2)
+            numberMoney: event.target.value,
+            numberCrypto: (event.target.value / this.props.bitcoinUsdFloatRate).toFixed(2)
         })
     }
 
     updateSelectCrypto(event) {
-        if (event.target.value === "Etherium") {
-            this.props.fetchEthereum()
-        }
+        // if (event.target.value === "Etherium") {
+        //     this.props.fetchEthereum()
+        // }
     }
 
     updateSelectMoney(event) {
-        console.log(event.target.value)
+        // console.log(event.target.value)
     }
 
     render() {
-
-        // if (this.props.ethereum.isComplete) {
-        //     console.log('ethereum.isComplete')
-        // }
-
         return (
+
             <div style={style.blockCalculator}>
                 <h2 style={style.h2}>Calculator</h2>
 
-                {this.props.bitcoin.isFetching && <p style={style.bodyCopy}>Loading...</p>}
-                {this.props.bitcoin.isError && <p style={style.bodyCopy}>Calculator not available.</p>}
-
-                {this.props.bitcoin.isComplete &&
                 <form>
                     <div style={style.formGroup}>
                         <input
@@ -102,31 +90,12 @@ class Calculator extends Component {
                         </select>
                     </div>
                 </form>
-                }
             </div>
+
         )
-
     }
 
 }
 
 
-const mapStateToProps = (state) => {
-    return {
-        bitcoin: state.bitcoin,
-        ethereum: state.ethereum,
-        isComplete: state.isComplete,
-        isError: state.isError,
-        isFetching: state.isFetching
-    }
-}
-
-const matchDispatchToProps = (dispatch) => {
-    return bindActionCreators({
-        fetchBitcoin: fetchBitcoin,
-        fetchEthereum: fetchEthereum
-    }, dispatch)
-}
-
-
-export default connect(mapStateToProps, matchDispatchToProps)(Calculator)
+export default Calculator

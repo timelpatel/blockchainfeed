@@ -1,13 +1,13 @@
 import React from 'react'
 import { Route, Switch } from 'react-router-dom'
-import BitcoinPage from './components/BitcoinPage/index.jsx'
-import EthereumPage from './components/EthereumPage/index.jsx'
-import ExchangeRates from './components/ExchangeRates/index.jsx'
+import BitcoinPage from './containers/BitcoinPage/index.jsx'
+import EthereumPage from './containers/EthereumPage/index.jsx'
+import HomePage from './containers/HomePage/index.jsx'
 
 
 const Routes = () => (
     <div>
-        <Route exact path='/' component={ExchangeRates}/>
+        <Route exact path='/' component={HomePage}/>
         <Route path='/bitcoin' component={BitcoinPage}/>
         <Route path='/ethereum' component={EthereumPage}/>
     </div>

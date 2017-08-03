@@ -1,9 +1,10 @@
 const style = {
     blockCurrency: {
-        background: '#efefef',
+        background: '#fff',
         borderRadius: 6,
-        marginBottom: 20,
-        padding: 20
+        padding: 20,
+        textAlign: 'center',
+        width: 150
     },
     bodyCopy: {
         color: '#363636',

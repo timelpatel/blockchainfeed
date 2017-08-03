@@ -2,10 +2,19 @@ import React, {Component} from 'react'
 import {bindActionCreators} from 'redux'
 import {connect} from 'react-redux'
 import {fetchBitcoin} from '../../actions/bitcoin.js'
+import BitcoinBadge from '../../components/BitcoinBadge/index.jsx'
+import LineGraph from '../../components/LineGraph/index.jsx'
 import style from './style.js'
 
 
-class BitcoinData extends Component {
+class BitcoinPage extends Component {
+
+    // constructor(props) {
+    //     super(props)
+    //     this.state = {
+    //         bitcoinFloatRate: 32
+    //     }
+    // }
 
     componentDidMount() {
         this.props.fetchBitcoin()
@@ -13,19 +22,23 @@ class BitcoinData extends Component {
 
     render() {
         return (
-            <div style={style.blockCurrency}>
+
+            <div style={style.page}>
+                <h2 style={style.h2}>Bitcoin (BTC)</h2>
 
                 {this.props.bitcoin.isFetching && <p style={style.bodyCopy}>Loading...</p>}
                 {this.props.bitcoin.isError && <p style={style.bodyCopy}>Data not available.</p>}
                 {this.props.bitcoin.isComplete &&
-                    <div>
-                        <p style={Object.assign({}, style.bodyCopy, style.bold)}>1 Bitcoin</p>
-                        <p style={style.bodyCopy}>&#36;{this.props.bitcoin.bitcoin.bpi.USD.rate}</p>
-                        <p style={style.bodyCopy}>&pound;{this.props.bitcoin.bitcoin.bpi.GBP.rate}</p>
-                    </div>
+                    <BitcoinBadge
+                        bitcoinUsdFloatRate={(this.props.bitcoin.bitcoin.bpi.USD.rate_float).toFixed(2)}
+                    />
                 }
 
+                <LineGraph
+                    data="../../../_stub/bitcoin-historical-data-static.json"
+                />
             </div>
+
         )
     }
 
@@ -46,4 +59,4 @@ const matchDispatchToProps = (dispatch) => {
 }
 
 
-export default connect(mapStateToProps, matchDispatchToProps)(BitcoinData)
+export default connect(mapStateToProps, matchDispatchToProps)(BitcoinPage)

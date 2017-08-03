@@ -1,33 +1,50 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
-import BitcoinData from '../../containers/BitcoinData/index.jsx'
-import Calculator from '../../containers/Calculator/index.jsx'
-import EthereumData from '../../containers/EthereumData/index.jsx'
 import style from './style.js'
 
 
-const ExchangeRates = () => (
+const ExchangeRates = (props) => (
+
     <div>
         <div style={style.blockExchangeRate}>
             <h2 style={style.blockExchangeRate__h2}>Exchange Rates</h2>
 
-            <Link
-                style={style.link}
-                to='/bitcoin'
-            >
-                <BitcoinData />
-            </Link>
+            <table style={style.blockExchangeRate__table}>
+                <thead>
+                    <tr>
+                        <th>Currency</th>
+                        <th>Rate</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td style={style.blockExchangeRate__table_td}>
+                            <Link
+                                style={style.link}
+                                to='/bitcoin'
+                            >
+                                Bitcoin
+                            </Link>
+                        </td>
+                        <td style={style.blockExchangeRate__table_td}>&#36;{props.bitcoinUsdFloatRate}</td>
+                    </tr>
+                    <tr>
+                        <td style={style.blockExchangeRate__table_td}>
+                            <Link
+                                style={style.link}
+                                to='/ethereum'
+                            >
+                                Ethereum
+                            </Link>
+                        </td>
+                        <td style={style.blockExchangeRate__table_td}>&#36;{props.ethereumRateUsd}</td>
+                    </tr>
+                </tbody>
+            </table>
 
-            <Link
-                style={style.link}
-                to='/ethereum'
-            >
-                <EthereumData />
-            </Link>
         </div>
-
-        <Calculator />
     </div>
+
 )
 
 export default ExchangeRates;

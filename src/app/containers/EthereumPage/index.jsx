@@ -2,31 +2,33 @@ import React, {Component} from 'react'
 import {bindActionCreators} from 'redux'
 import {connect} from 'react-redux'
 import {fetchEthereum} from '../../actions/ethereum.js'
+import EthereumBadge from '../../components/EthereumBadge/index.jsx'
 import style from './style.js'
 
 
-class EthereumData extends Component {
+class EthereumPage extends Component {
 
     componentDidMount() {
         this.props.fetchEthereum()
     }
 
     render() {
-
         return (
-            <div style={style.blockCurrency}>
+
+            <div style={style.page}>
+                <h2 style={style.h2}>Etheteum (ETC)</h2>
 
                 {this.props.ethereum.isFetching && <p style={style.bodyCopy}>Loading...</p>}
                 {this.props.ethereum.isError && <p style={style.bodyCopy}>Data not available.</p>}
-                {this.props.ethereum.isComplete &&
-                    <div>
-                        <p style={Object.assign({}, style.bodyCopy, style.bold)}>1 Ethereum</p>
-                        <p style={style.bodyCopy}>&#36;{this.props.ethereum.ethereum.price.usd}</p>
-                        <p style={style.bodyCopy}>&pound;{this.props.ethereum.ethereum.price.gbp}</p>
-                    </div>
-                }
 
+                {this.props.ethereum.isComplete &&
+                    <EthereumBadge
+                        ethereumRateUsd={(this.props.ethereum.ethereum.price.usd).toFixed(2)}
+                        ethereumRateGbp={(this.props.ethereum.ethereum.price.gbp).toFixed(2)}
+                    />
+                }
             </div>
+
         )
     }
 
@@ -47,4 +49,4 @@ const matchDispatchToProps = (dispatch) => {
 }
 
 
-export default connect(mapStateToProps, matchDispatchToProps)(EthereumData)
+export default connect(mapStateToProps, matchDispatchToProps)(EthereumPage)
