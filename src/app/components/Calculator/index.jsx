@@ -3,7 +3,7 @@ import {bindActionCreators} from 'redux'
 import {connect} from 'react-redux'
 import {fetchBitcoin} from '../../actions/bitcoin.js'
 import {fetchEthereum} from '../../actions/ethereum.js'
-import style from './style.js'
+import style from './style.scss'
 
 
 class Calculator extends Component {
@@ -36,7 +36,7 @@ class Calculator extends Component {
     }
 
     updateSelectCrypto(event) {
-        // if (event.target.value === "Etherium") {
+        // if (event.target.value === 'Etherium') {
         //     this.props.fetchEthereum()
         // }
     }
@@ -48,45 +48,45 @@ class Calculator extends Component {
     render() {
         return (
 
-            <div style={style.blockCalculator}>
-                <h2 style={style.h2}>Calculator</h2>
+            <div className='container__blockCalculator'>
+                <h2 className='text__h2'>Calculator</h2>
 
                 <form>
-                    <div style={style.formGroup}>
+                    <div className='form__formGroup'>
                         <input
-                            min="1.00"
-                            name="numberCrypto"
+                            className='form__textField'
+                            min='1.00'
+                            name='numberCrypto'
                             onChange={this.updateMoney}
-                            step="1.00"
-                            style={style.textField}
-                            type="number"
+                            step='1.00'
+                            type='number'
                             value={this.state.numberCrypto}
                         />
                         <select
+                            className='form__selectField'
                             onChange={this.updateSelectCrypto}
-                            style={style.selectField}
                         >
-                            <option value="Bitcoin">Bitcoin</option>
-                            <option value="Etherium">Etherium</option>
+                            <option value='Bitcoin'>Bitcoin</option>
+                            <option value='Etherium'>Etherium</option>
                         </select>
                     </div>
 
-                    <div style={style.formGroup}>
+                    <div className='form__formGroup'>
                         <input
-                            min="0.01"
-                            name="numberMoney"
+                            className='form__textField'
+                            min='0.01'
+                            name='numberMoney'
                             onChange={this.updateCrypto}
-                            step="1.00"
-                            style={style.textField}
-                            type="number"
+                            step='1.00'
+                            type='number'
                             value={this.state.numberMoney}
                         />
                         <select
+                            className='form__selectField'
                             onChange={this.updateSelectMoney}
-                            style={style.selectField}
                         >
-                            <option value="US Dollar">US Dollar</option>
-                            <option value="British Pound">British Pound</option>
+                            <option value='US Dollar'>US Dollar</option>
+                            <option value='British Pound'>British Pound</option>
                         </select>
                     </div>
                 </form>

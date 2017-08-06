@@ -1,10 +1,10 @@
-var webpack = require('webpack');
-var path = require('path');
+const webpack = require('webpack')
+const path = require('path')
 
-var BUILD_DIR = path.resolve(__dirname, 'src/public');
-var APP_DIR = path.resolve(__dirname, 'src/app');
+const BUILD_DIR = path.resolve(__dirname, 'src/public');
+const APP_DIR = path.resolve(__dirname, 'src/app');
 
-var config = {
+const config = {
     entry: APP_DIR + '/app.js',
     output: {
         path: BUILD_DIR,
@@ -15,10 +15,14 @@ var config = {
             {
                 test : /\.jsx?/,
                 include : APP_DIR,
-                loader : 'babel-loader'
+                use : 'babel-loader'
+            },
+            {
+                test : /\.scss$/,
+                use: ['style-loader','css-loader','sass-loader']
             }
         ]
     }
 };
 
-module.exports = config;
+module.exports = config

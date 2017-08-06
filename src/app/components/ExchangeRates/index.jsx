@@ -1,15 +1,15 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
-import style from './style.js'
+import style from './style.scss'
 
 
 const ExchangeRates = (props) => (
 
     <div>
-        <div style={style.blockExchangeRate}>
-            <h2 style={style.blockExchangeRate__h2}>Exchange Rates</h2>
+        <div className='container__exchange-rates'>
+            <h2 className='text__h2--exchange-rates'>Exchange Rates</h2>
 
-            <table style={style.blockExchangeRate__table}>
+            <table className='table__exchange-rates'>
                 <thead>
                     <tr>
                         <th>Currency</th>
@@ -18,26 +18,26 @@ const ExchangeRates = (props) => (
                 </thead>
                 <tbody>
                     <tr>
-                        <td style={style.blockExchangeRate__table_td}>
+                        <td>
                             <Link
-                                style={style.link}
+                                className='link'
                                 to='/bitcoin'
                             >
                                 Bitcoin
                             </Link>
                         </td>
-                        <td style={style.blockExchangeRate__table_td}>&#36;{props.bitcoinUsdFloatRate}</td>
+                        <td>&#36;{props.bitcoinUsdFloatRate}</td>
                     </tr>
                     <tr>
-                        <td style={style.blockExchangeRate__table_td}>
+                        <td>
                             <Link
-                                style={style.link}
+                                className='link'
                                 to='/ethereum'
                             >
                                 Ethereum
                             </Link>
                         </td>
-                        <td style={style.blockExchangeRate__table_td}>&#36;{props.ethereumRateUsd}</td>
+                        <td>&#36;{props.ethereumRateUsd}</td>
                     </tr>
                 </tbody>
             </table>

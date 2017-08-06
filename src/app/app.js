@@ -7,8 +7,8 @@ import { Provider } from 'react-redux'
 import store from './store.js'
 import Header from './components/Header/index.jsx'
 
-
 const customHistory = createBrowserHistory()
+const css = require('./base.scss')
 
 const App = () => (
     <div>

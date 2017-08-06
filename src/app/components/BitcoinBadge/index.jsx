@@ -1,13 +1,13 @@
 import React, {Component} from 'react'
-import style from './style.js'
+import style from './style.scss'
 
 
 const BitcoinBadge = (props) => {
 
     return (
-        <div style={style.blockCurrency}>
-            <p style={Object.assign({}, style.bodyCopy, style.bold)}>BTC / Bitcoin</p>
-            <p style={style.bodyCopy}>&#36;{props.bitcoinUsdFloatRate}</p>
+        <div className='container__blockCurrency'>
+            <p className='text__bodyCopy text__bold'>BTC / Bitcoin</p>
+            <p className='text__bodyCopy'>&#36;{props.bitcoinUsdFloatRate}</p>
         </div>
     )
 

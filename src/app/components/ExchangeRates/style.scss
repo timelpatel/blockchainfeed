@@ -1,0 +1,42 @@
+.container__exchange-rates {
+    margin: 20px;
+}
+
+.text__h2--exchange-rates {
+    color: #aaa;
+    font-family: arial-black;
+    font-size: 15px;
+    margin-bottom: 10px;
+    text-align: center;
+    text-transform: uppercase;
+}
+
+.table__exchange-rates {
+    background: #fff;
+    border-radius: 6px;
+    font-size: 12px;
+    text-align: center;
+    width: 100%;
+
+    thead {
+        color: #aaa;
+
+        th:first-child {
+            text-align: left;
+        }
+
+        th {
+            border-bottom: 1px solid #efefef;
+            padding: 10px;
+        }
+    }
+
+    tbody {
+        td:first-child {
+            text-align: left;
+        }
+        td {
+            padding: 10px;
+        }
+    }
+}

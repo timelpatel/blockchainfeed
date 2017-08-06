@@ -4,7 +4,7 @@ import {connect} from 'react-redux'
 import {fetchBitcoin} from '../../actions/bitcoin.js'
 import BitcoinBadge from '../../components/BitcoinBadge/index.jsx'
 import LineGraph from '../../components/LineGraph/index.jsx'
-import style from './style.js'
+import style from './style.scss'
 
 
 class BitcoinPage extends Component {
@@ -23,8 +23,8 @@ class BitcoinPage extends Component {
     render() {
         return (
 
-            <div style={style.page}>
-                <h2 style={style.h2}>Bitcoin (BTC)</h2>
+            <div className='container__page'>
+                <h2 className='text__h2'>Bitcoin (BTC)</h2>
 
                 {this.props.bitcoin.isFetching && <p style={style.bodyCopy}>Loading...</p>}
                 {this.props.bitcoin.isError && <p style={style.bodyCopy}>Data not available.</p>}

@@ -5,7 +5,6 @@ import {fetchBitcoin} from '../../actions/bitcoin.js'
 import {fetchEthereum} from '../../actions/ethereum.js'
 import Calculator from '../../components/Calculator/index.jsx'
 import ExchangeRates from '../../components/ExchangeRates/index.jsx'
-import style from './style.js'
 
 
 class HomePage extends Component {

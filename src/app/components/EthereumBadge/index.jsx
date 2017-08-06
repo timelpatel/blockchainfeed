@@ -1,14 +1,14 @@
 import React, {Component} from 'react'
-import style from './style.js'
+import style from './style.scss'
 
 
 const EthereumBadge = (props) => {
 
     return (
-        <div style={style.blockCurrency}>
-            <p style={Object.assign({}, style.bodyCopy, style.bold)}>ETC / Etheteum</p>
-            <p style={style.bodyCopy}>&#36;{props.ethereumRateUsd}</p>
-            <p style={style.bodyCopy}>&pound;{props.ethereumRateGbp}</p>
+        <div className='container__blockCurrency'>
+            <p className='text__bodyCopy text__bold'>ETC / Etheteum</p>
+            <p className='text__bodyCopy'>&#36;{props.ethereumRateUsd}</p>
+            <p className='text__bodyCopy'>&pound;{props.ethereumRateGbp}</p>
         </div>
     )
 

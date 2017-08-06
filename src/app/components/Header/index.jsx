@@ -1,14 +1,16 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
-import style from './style.js'
+import style from './style.scss'
 
 
 const Header = () => (
-    <header style={style.header}>
+    <header className='container__header'>
         <Link
-            style={style.header__h1_hover}
+            className='header__h1--hover'
             to='/'
-        ><h1 style={style.header__h1}>TIMELAB DATA</h1></Link>
+        >
+            <h1 className='header__h1'>TIMELAB DATA</h1>
+        </Link>
     </header>
 )
 

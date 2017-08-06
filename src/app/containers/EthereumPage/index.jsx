@@ -3,7 +3,7 @@ import {bindActionCreators} from 'redux'
 import {connect} from 'react-redux'
 import {fetchEthereum} from '../../actions/ethereum.js'
 import EthereumBadge from '../../components/EthereumBadge/index.jsx'
-import style from './style.js'
+import style from './style.scss'
 
 
 class EthereumPage extends Component {
@@ -15,8 +15,8 @@ class EthereumPage extends Component {
     render() {
         return (
 
-            <div style={style.page}>
-                <h2 style={style.h2}>Etheteum (ETC)</h2>
+            <div className='container__page'>
+                <h2 className='text__h2'>Etheteum (ETC)</h2>
 
                 {this.props.ethereum.isFetching && <p style={style.bodyCopy}>Loading...</p>}
                 {this.props.ethereum.isError && <p style={style.bodyCopy}>Data not available.</p>}
