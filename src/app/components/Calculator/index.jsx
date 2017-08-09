@@ -11,82 +11,116 @@ class Calculator extends Component {
     constructor(props) {
         super(props)
         this.state = {
+            currentCrypto: 'btc',
+            currentMoney: 'usd',
             numberCrypto: 1.00,
-            numberMoney: 0.00
+            numberMoney: this.props.bitcoinUsdFloatRate
         }
 
-        this.updateMoney = this.updateMoney.bind(this)
-        this.updateCrypto = this.updateCrypto.bind(this)
+        this.changeMoney = this.changeMoney.bind(this)
+        this.changeCrypto = this.changeCrypto.bind(this)
         this.updateSelectCrypto = this.updateSelectCrypto.bind(this)
         this.updateSelectMoney = this.updateSelectMoney.bind(this)
     }
 
-    updateMoney(event) {
-        this.setState({
-            numberCrypto: event.target.value,
-            numberMoney: (this.props.bitcoinUsdFloatRate * event.target.value).toFixed(2)
-        })
+    componentWillReceiveProps(nextProps) {
+        if (this.props != this.nextProps) {
+            this.calculateMoney()
+        }
     }
 
-    updateCrypto(event) {
-        this.setState({
-            numberMoney: event.target.value,
-            numberCrypto: (event.target.value / this.props.bitcoinUsdFloatRate).toFixed(2)
-        })
+    changeCrypto(event) {
+        this.setState(
+            {numberCrypto: event.target.value}, () => {
+                this.calculateMoney()
+            }
+        )
+    }
+
+    changeMoney(event) {
+        this.setState(
+            {numberMoney: event.target.value}, () => {
+                this.calculateCrypto()
+            }
+        )
+
+        // this.setState(prevState => (
+        //     {numberMoney: !prevState.numberMoney}, () => {
+        //         this.calculateCrypto()
+        //     }
+        // ))
+    }
+
+    calculateCrypto() {
+        this.setState(prevState => ({
+            numberCrypto: (this.state.numberMoney / this.props.bitcoinUsdFloatRate).toFixed(2)
+        }))
+    }
+
+    calculateMoney() {
+        let cryptoRate = 0
+        if (this.state.currentCrypto === 'btc') {cryptoRate = this.props.bitcoinUsdFloatRate}
+        else if (this.state.currentCrypto === 'eth') {cryptoRate = this.props.ethereumRateUsd}
+
+        this.setState({ numberMoney: (cryptoRate * this.state.numberCrypto).toFixed(2) })
     }
 
     updateSelectCrypto(event) {
-        // if (event.target.value === 'Etherium') {
-        //     this.props.fetchEthereum()
-        // }
+        this.setState({currentCrypto: event.target.value}), () => {
+            this.calculateMoney()
+        }
     }
 
     updateSelectMoney(event) {
-        // console.log(event.target.value)
+        // this.setState({currentMoney: event.target.value}), () => {
+        //     this.calculateCrypto()
+        // }
     }
 
     render() {
         return (
 
-            <div className='container__blockCalculator'>
+            <div className='container__calculator'>
                 <h2 className='text__h2'>Calculator</h2>
 
                 <form>
-                    <div className='form__formGroup'>
+                    <div className='form__form-group'>
                         <input
-                            className='form__textField'
+                            className='form__text-field'
                             min='1.00'
                             name='numberCrypto'
-                            onChange={this.updateMoney}
+                            onChange={this.changeCrypto}
                             step='1.00'
                             type='number'
                             value={this.state.numberCrypto}
                         />
                         <select
-                            className='form__selectField'
+                            className='form__select-field'
+                            name='selectCrypto'
                             onChange={this.updateSelectCrypto}
                         >
-                            <option value='Bitcoin'>Bitcoin</option>
-                            <option value='Etherium'>Etherium</option>
+                            <option value='btc'>Bitcoin</option>
+                            <option value='eth'>Etherium</option>
                         </select>
                     </div>
 
-                    <div className='form__formGroup'>
+                    <div className='form__form-group'>
                         <input
-                            className='form__textField'
+                            className='form__text-field'
                             min='0.01'
                             name='numberMoney'
-                            onChange={this.updateCrypto}
+                            onChange={this.changeMoney}
                             step='1.00'
                             type='number'
                             value={this.state.numberMoney}
                         />
                         <select
-                            className='form__selectField'
+                            className='form__select-field'
+                            name='selectMoney'
                             onChange={this.updateSelectMoney}
                         >
-                            <option value='US Dollar'>US Dollar</option>
-                            <option value='British Pound'>British Pound</option>
+                            <option value='usd'>US Dollar</option>
+                            <option value='gbp'>British Pound</option>
                         </select>
                     </div>
                 </form>

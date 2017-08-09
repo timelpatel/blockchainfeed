@@ -1,4 +1,4 @@
-.container__blockCalculator {
+.container__calculator {
     background: #fff;
     border-radius: 6px;
     clear: both;
@@ -6,14 +6,18 @@
     padding: 20px;
 }
 
-.text__bodyCopy {
+.text__body-copy {
     color: #363636;
     font-size: 12px;
     line-height: 2;
 }
 
-.form__formGroup {
+.form__form-group {
     margin-bottom: 20px;
+
+    &:last-child {
+        margin-bottom: 0;
+    }
 }
 
 .text__h2 {
@@ -24,11 +28,11 @@
     text-transform: uppercase;
 }
 
-.form__selectField {
+.form__select-field {
     font-size: 17px;
 }
 
-.form__textField {
+.form__text-field {
     font-size: 24px;
     margin-right: 20px;
     padding: 10px;

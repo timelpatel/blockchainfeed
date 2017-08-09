@@ -27,6 +27,7 @@ class HomePage extends Component {
                 <Calculator
                     bitcoinUsdFloatRate={this.props.bitcoin.isComplete && (this.props.bitcoin.bitcoin.bpi.USD.rate_float).toFixed(2)}
                     ethereumRateUsd={this.props.ethereum.isComplete && (this.props.ethereum.ethereum.price.usd).toFixed(2)}
+                    ethereumRateGbp={this.props.ethereum.isComplete && (this.props.ethereum.ethereum.price.gbp).toFixed(2)}
                 />
             </div>
 
