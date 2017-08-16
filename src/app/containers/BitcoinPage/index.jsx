@@ -9,13 +9,6 @@ import style from './style.scss'
 
 class BitcoinPage extends Component {
 
-    // constructor(props) {
-    //     super(props)
-    //     this.state = {
-    //         bitcoinFloatRate: 32
-    //     }
-    // }
-
     componentDidMount() {
         this.props.fetchBitcoin()
     }
@@ -30,7 +23,7 @@ class BitcoinPage extends Component {
                 {this.props.bitcoin.isError && <p style={style.bodyCopy}>Data not available.</p>}
                 {this.props.bitcoin.isComplete &&
                     <BitcoinBadge
-                        bitcoinUsdFloatRate={(this.props.bitcoin.bitcoin.bpi.USD.rate_float).toFixed(2)}
+                        bitcoinUsdLast={(this.props.bitcoin.bitcoin.price.usd.last).toFixed(2)}
                     />
                 }
 

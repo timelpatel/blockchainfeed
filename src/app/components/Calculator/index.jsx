@@ -14,7 +14,7 @@ class Calculator extends Component {
             currentCrypto: 'btc',
             currentMoney: 'usd',
             numberCrypto: 1.00,
-            numberMoney: this.props.bitcoinUsdFloatRate
+            numberMoney: this.props.bitcoinUsdLast
         }
 
         this.changeMoney = this.changeMoney.bind(this)
@@ -53,14 +53,14 @@ class Calculator extends Component {
 
     calculateCrypto() {
         this.setState(prevState => ({
-            numberCrypto: (this.state.numberMoney / this.props.bitcoinUsdFloatRate).toFixed(2)
+            numberCrypto: (this.state.numberMoney / this.props.bitcoinUsdLast).toFixed(2)
         }))
     }
 
     calculateMoney() {
         let cryptoRate = 0
-        if (this.state.currentCrypto === 'btc') {cryptoRate = this.props.bitcoinUsdFloatRate}
-        else if (this.state.currentCrypto === 'eth') {cryptoRate = this.props.ethereumRateUsd}
+        if (this.state.currentCrypto === 'btc') {cryptoRate = this.props.bitcoinUsdLast}
+        else if (this.state.currentCrypto === 'eth') {cryptoRate = this.props.ethereumUsdLast}
 
         this.setState({ numberMoney: (cryptoRate * this.state.numberCrypto).toFixed(2) })
     }

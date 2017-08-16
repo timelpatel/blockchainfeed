@@ -1,0 +1,25 @@
+{
+    "name":"Ethereum",
+    "code":"ETH",
+    "timestamp":"1502393471135",
+    "price": {
+        "gbp": {
+            "symbol":"&pound;",
+            "last":289.7663,
+            "high":300.0000,
+            "low":100.0000,
+            "open":280.0000,
+            "change":-3,
+            "volume":100.10000000
+        },
+        "usd": {
+            "symbol":"&#36;",
+            "last":589.7663,
+            "high":800.0000,
+            "low":400.0000,
+            "open":400.0000,
+            "change":3,
+            "volume":100.10000000
+        }
+    }
+}

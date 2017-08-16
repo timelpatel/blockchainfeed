@@ -13,32 +13,16 @@ const ExchangeRates = (props) => (
                 <thead>
                     <tr>
                         <th>Currency</th>
+                        <th>Open</th>
+                        <th>High</th>
+                        <th>Low</th>
+                        <th>Change</th>
                         <th>Rate</th>
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                        <td>
-                            <Link
-                                className='link'
-                                to='/bitcoin'
-                            >
-                                Bitcoin
-                            </Link>
-                        </td>
-                        <td>&#36;{props.bitcoinUsdFloatRate}</td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <Link
-                                className='link'
-                                to='/ethereum'
-                            >
-                                Ethereum
-                            </Link>
-                        </td>
-                        <td>&#36;{props.ethereumRateUsd}</td>
-                    </tr>
+                    <tr>{props.bitcoinData}</tr>
+                    <tr>{props.ethereumData}</tr>
                 </tbody>
             </table>
 

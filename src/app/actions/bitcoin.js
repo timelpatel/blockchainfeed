@@ -7,7 +7,7 @@ export function fetchBitcoin() {
     return dispatch => {
         dispatch({type: "FETCH_BITCOIN"});
 
-        axios.get('http://localhost:3030/_stub/bitcoin-data-static.json')
+        axios.get('http://localhost:3030/_stub/btc.json')
         // axios.get('http://api.coindesk.com/v1/bpi/currentprice.json')
             .then((response) => {
                 dispatch({

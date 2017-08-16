@@ -7,7 +7,7 @@ export function fetchEthereum() {
     return dispatch => {
         dispatch({type: "FETCH_ETHEREUM"});
 
-        axios.get('http://localhost:3030/_stub/ethereum-data-static.json')
+        axios.get('http://localhost:3030/_stub/eth.json')
         // axios.get('https://coinmarketcap-nexuist.rhcloud.com/api/eth')
             .then((response) => {
                 dispatch({

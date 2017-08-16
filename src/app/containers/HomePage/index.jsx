@@ -7,6 +7,8 @@ import Calculator from '../../components/Calculator/index.jsx'
 import ExchangeRates from '../../components/ExchangeRates/index.jsx'
 
 
+let bitcoinRow
+
 class HomePage extends Component {
 
     componentDidMount() {
@@ -14,20 +16,82 @@ class HomePage extends Component {
         this.props.fetchEthereum()
     }
 
-    render() {
+    createCurrencyCols(currencyName, priceObj) {
 
-        return(
+        const priceAry = [
+            currencyName,
+            priceObj.open.toFixed(2),
+            priceObj.high.toFixed(2),
+            priceObj.low.toFixed(2),
+            `${priceObj.change}%`,
+            priceObj.last.toFixed(2)
+        ];
+
+        // `${currencyName.toLowerCase()}Row` = priceAry.map((item, index) =>
+        bitcoinRow = priceAry.map((item, index) =>
+            <td key={index}>
+                {item}
+            </td>
+        )
+    }
+
+    render() {
+        // Bitcoin row for Exchange Rate table
+        if (this.props.bitcoin.isComplete) {
+            this.createCurrencyCols(this.props.bitcoin.bitcoin.name, this.props.bitcoin.bitcoin.price.usd)
+        }
+
+        // let bitcoinRow = ''
+        //
+        // if (this.props.bitcoin.isComplete) {
+        //     const priceObj = this.props.bitcoin.bitcoin.price.usd
+        //
+        //     const priceAry = [
+        //         this.props.bitcoin.bitcoin.name,
+        //         priceObj.open.toFixed(2),
+        //         priceObj.high.toFixed(2),
+        //         priceObj.low.toFixed(2),
+        //         `${priceObj.change}%`,
+        //         priceObj.last.toFixed(2)
+        //     ]
+        //
+        //     bitcoinRow = priceAry.map((item, index) =>
+        //         <td key={index}>
+        //             {item}
+        //         </td>
+        //     )
+        // }
+
+        // Ethereum row for Exchange Rate table
+        let ethereumRow = ''
+
+        if (this.props.ethereum.isComplete) {
+            const priceObj = this.props.ethereum.ethereum.price.usd
+
+            const priceAry = [
+                this.props.ethereum.ethereum.name,
+                priceObj.open.toFixed(2),
+                priceObj.high.toFixed(2),
+                priceObj.low.toFixed(2),
+                `${priceObj.change}%`,
+                priceObj.last.toFixed(2)
+            ]
+
+            ethereumRow = priceAry.map((item, index) =>
+                <td key={index}>{item}</td>
+            )
+        }
+
+        return (
 
             <div>
                 <ExchangeRates
-                    bitcoinUsdFloatRate={this.props.bitcoin.isComplete && (this.props.bitcoin.bitcoin.bpi.USD.rate_float).toFixed(2)}
-                    ethereumRateUsd={this.props.ethereum.isComplete && (this.props.ethereum.ethereum.price.usd).toFixed(2)}
-                    ethereumRateGbp={this.props.ethereum.isComplete && (this.props.ethereum.ethereum.price.gbp).toFixed(2)}
+                    bitcoinData={bitcoinRow}
+                    ethereumData={ethereumRow}
                 />
                 <Calculator
-                    bitcoinUsdFloatRate={this.props.bitcoin.isComplete && (this.props.bitcoin.bitcoin.bpi.USD.rate_float).toFixed(2)}
-                    ethereumRateUsd={this.props.ethereum.isComplete && (this.props.ethereum.ethereum.price.usd).toFixed(2)}
-                    ethereumRateGbp={this.props.ethereum.isComplete && (this.props.ethereum.ethereum.price.gbp).toFixed(2)}
+                    bitcoinUsdLast={this.props.bitcoin.isComplete && (this.props.bitcoin.bitcoin.price.usd.last).toFixed(2)}
+                    ethereumUsdLast={this.props.ethereum.isComplete && (this.props.ethereum.ethereum.price.usd.last).toFixed(2)}
                 />
             </div>
 

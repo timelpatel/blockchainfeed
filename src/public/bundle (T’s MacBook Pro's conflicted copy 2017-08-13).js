@@ -47783,8 +47783,6 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-var bitcoinRow = void 0;
-
 var HomePage = function (_Component) {
     _inherits(HomePage, _Component);
 
@@ -47801,72 +47799,45 @@ var HomePage = function (_Component) {
             this.props.fetchEthereum();
         }
     }, {
-        key: 'createCurrencyCols',
-        value: function createCurrencyCols(currencyName, priceObj) {
-
-            var priceAry = [currencyName, priceObj.open.toFixed(2), priceObj.high.toFixed(2), priceObj.low.toFixed(2), priceObj.change + '%', priceObj.last.toFixed(2)];
-
-            // `${currencyName.toLowerCase()}Row` = priceAry.map((item, index) =>
-            bitcoinRow = priceAry.map(function (item, index) {
-                return _react2.default.createElement(
-                    'td',
-                    { key: index },
-                    item
-                );
-            });
-        }
-    }, {
         key: 'render',
         value: function render() {
-            // Bitcoin row for Exchange Rate table
+
+            var priceData = '';
             if (this.props.bitcoin.isComplete) {
-                this.createCurrencyCols(this.props.bitcoin.bitcoin.name, this.props.bitcoin.bitcoin.price.usd);
-            }
-
-            // let bitcoinRow = ''
-            //
-            // if (this.props.bitcoin.isComplete) {
-            //     const priceObj = this.props.bitcoin.bitcoin.price.usd
-            //
-            //     const priceAry = [
-            //         this.props.bitcoin.bitcoin.name,
-            //         priceObj.open.toFixed(2),
-            //         priceObj.high.toFixed(2),
-            //         priceObj.low.toFixed(2),
-            //         `${priceObj.change}%`,
-            //         priceObj.last.toFixed(2)
-            //     ]
-            //
-            //     bitcoinRow = priceAry.map((item, index) =>
-            //         <td key={index}>
-            //             {item}
-            //         </td>
-            //     )
-            // }
-
-            // Ethereum row for Exchange Rate table
-            var ethereumRow = '';
-
-            if (this.props.ethereum.isComplete) {
-                var priceObj = this.props.ethereum.ethereum.price.usd;
-
-                var priceAry = [this.props.ethereum.ethereum.name, priceObj.open.toFixed(2), priceObj.high.toFixed(2), priceObj.low.toFixed(2), priceObj.change + '%', priceObj.last.toFixed(2)];
-
-                ethereumRow = priceAry.map(function (item, index) {
-                    return _react2.default.createElement(
-                        'td',
-                        { key: index },
-                        item
-                    );
-                });
+                priceData = this.props.bitcoin.bitcoin.price.usd;
             }
 
             return _react2.default.createElement(
                 'div',
                 null,
                 _react2.default.createElement(_index4.default, {
-                    bitcoinData: bitcoinRow,
-                    ethereumData: ethereumRow
+                    bitcoinData: priceData,
+                    bitcoinUsdLast: this.props.bitcoin.isComplete && _react2.default.createElement(
+                        'span',
+                        null,
+                        '$',
+                        this.props.bitcoin.bitcoin.price.usd.last.toFixed(2)
+                    )
+                    // this.props.bitcoin.isError
+                    //     <span>-</span>
+                    ,
+                    ethereumUsdLast: this.props.ethereum.isComplete && _react2.default.createElement(
+                        'span',
+                        null,
+                        '$',
+                        this.props.ethereum.ethereum.price.usd.last.toFixed(2)
+                    )
+                    // this.props.ethereum.isError &&
+                    //     <span>-</span>
+                    ,
+                    ethereumGbpLast: this.props.ethereum.isComplete && _react2.default.createElement(
+                        'span',
+                        null,
+                        this.props.ethereum.ethereum.price.gbp.last.toFixed(2)
+                    )
+                    // this.props.ethereum.isError &&
+                    //     <span>-</span>
+
                 }),
                 _react2.default.createElement(_index2.default, {
                     bitcoinUsdLast: this.props.bitcoin.isComplete && this.props.bitcoin.bitcoin.price.usd.last.toFixed(2),
@@ -48245,7 +48216,52 @@ var ExchangeRates = function ExchangeRates(props) {
                     _react2.default.createElement(
                         'tr',
                         null,
-                        props.ethereumData
+                        _react2.default.createElement(
+                            'td',
+                            null,
+                            _react2.default.createElement(
+                                _reactRouterDom.Link,
+                                {
+                                    className: 'link',
+                                    to: '/bitcoin'
+                                },
+                                'Bitcoin'
+                            )
+                        ),
+                        _react2.default.createElement('td', null),
+                        _react2.default.createElement('td', null),
+                        _react2.default.createElement('td', null),
+                        _react2.default.createElement('td', null),
+                        _react2.default.createElement(
+                            'td',
+                            null,
+                            props.bitcoinUsdLast
+                        )
+                    ),
+                    _react2.default.createElement(
+                        'tr',
+                        null,
+                        _react2.default.createElement(
+                            'td',
+                            null,
+                            _react2.default.createElement(
+                                _reactRouterDom.Link,
+                                {
+                                    className: 'link',
+                                    to: '/ethereum'
+                                },
+                                'Ethereum'
+                            )
+                        ),
+                        _react2.default.createElement('td', null),
+                        _react2.default.createElement('td', null),
+                        _react2.default.createElement('td', null),
+                        _react2.default.createElement('td', null),
+                        _react2.default.createElement(
+                            'td',
+                            null,
+                            props.ethereumUsdLast
+                        )
                     )
                 )
             )

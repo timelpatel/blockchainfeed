@@ -20,11 +20,10 @@ class EthereumPage extends Component {
 
                 {this.props.ethereum.isFetching && <p style={style.bodyCopy}>Loading...</p>}
                 {this.props.ethereum.isError && <p style={style.bodyCopy}>Data not available.</p>}
-
                 {this.props.ethereum.isComplete &&
                     <EthereumBadge
-                        ethereumRateUsd={(this.props.ethereum.ethereum.price.usd).toFixed(2)}
-                        ethereumRateGbp={(this.props.ethereum.ethereum.price.gbp).toFixed(2)}
+                        ethereumUsdLast={(this.props.ethereum.ethereum.price.usd.last).toFixed(2)}
+                        ethereumGbpLast={(this.props.ethereum.ethereum.price.gbp.last).toFixed(2)}
                     />
                 }
             </div>

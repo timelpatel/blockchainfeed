@@ -7,8 +7,8 @@ const EthereumBadge = (props) => {
     return (
         <div className='container__blockCurrency'>
             <p className='text__bodyCopy text__bold'>ETC / Etheteum</p>
-            <p className='text__bodyCopy'>&#36;{props.ethereumRateUsd}</p>
-            <p className='text__bodyCopy'>&pound;{props.ethereumRateGbp}</p>
+            <p className='text__bodyCopy'>&#36;{props.ethereumUsdLast}</p>
+            <p className='text__bodyCopy'>&pound;{props.ethereumGbpLast}</p>
         </div>
     )
 
