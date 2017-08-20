@@ -11,16 +11,16 @@ class Calculator extends Component {
     constructor(props) {
         super(props)
         this.state = {
-            currentCrypto: 'btc',
-            currentMoney: 'usd',
-            numberCrypto: 1.00,
-            numberMoney: this.props.bitcoinUsdLast
+            cryptoCode: 'btc',
+            moneyCode: 'usd',
+            textCrypto: 1.00,
+            textMoney: this.props.bitcoinUsdLast
         }
 
-        this.changeMoney = this.changeMoney.bind(this)
-        this.changeCrypto = this.changeCrypto.bind(this)
-        this.updateSelectCrypto = this.updateSelectCrypto.bind(this)
-        this.updateSelectMoney = this.updateSelectMoney.bind(this)
+        this.handleMoneyChange = this.handleMoneyChange.bind(this)
+        this.handleCryptoChange = this.handleCryptoChange.bind(this)
+        this.handleCryptoCodeChange = this.handleCryptoCodeChange.bind(this)
+        this.handleMoneyCodeChange = this.handleMoneyCodeChange.bind(this)
     }
 
     componentWillReceiveProps(nextProps) {
@@ -29,52 +29,43 @@ class Calculator extends Component {
         }
     }
 
-    changeCrypto(event) {
-        this.setState(
-            {numberCrypto: event.target.value}, () => {
-                this.calculateMoney()
-            }
-        )
+    handleCryptoChange(event) {
+        this.setState({textCrypto: event.target.value}, () => {
+            this.calculateMoney()
+        })
     }
 
-    changeMoney(event) {
-        this.setState(
-            {numberMoney: event.target.value}, () => {
-                this.calculateCrypto()
-            }
-        )
-
-        // this.setState(prevState => (
-        //     {numberMoney: !prevState.numberMoney}, () => {
-        //         this.calculateCrypto()
-        //     }
-        // ))
+    handleMoneyChange(event) {
+        this.setState({textMoney: event.target.value}, () => {
+            this.calculateCrypto()
+        })
     }
 
     calculateCrypto() {
-        this.setState(prevState => ({
-            numberCrypto: (this.state.numberMoney / this.props.bitcoinUsdLast).toFixed(2)
-        }))
+        let cryptoRate = 0
+        if (this.state.moneyCode === 'usd') {cryptoRate = this.props.bitcoinUsdLast}
+        else if (this.state.moneyCode === 'gbp') {cryptoRate = this.props.bitcoinGbpLast}
+        this.setState({ textCrypto: (this.state.textMoney / cryptoRate).toFixed(2) })
     }
 
     calculateMoney() {
         let cryptoRate = 0
-        if (this.state.currentCrypto === 'btc') {cryptoRate = this.props.bitcoinUsdLast}
-        else if (this.state.currentCrypto === 'eth') {cryptoRate = this.props.ethereumUsdLast}
+        if (this.state.cryptoCode === 'btc') {cryptoRate = this.props.bitcoinUsdLast}
+        else if (this.state.cryptoCode === 'eth') {cryptoRate = this.props.ethereumUsdLast}
 
-        this.setState({ numberMoney: (cryptoRate * this.state.numberCrypto).toFixed(2) })
+        this.setState({ textMoney: (cryptoRate * this.state.textCrypto).toFixed(2) })
     }
 
-    updateSelectCrypto(event) {
-        this.setState({currentCrypto: event.target.value}), () => {
+    handleCryptoCodeChange(event) {
+        this.setState({cryptoCode: event.target.value}, () => {
             this.calculateMoney()
-        }
+        })
     }
 
-    updateSelectMoney(event) {
-        // this.setState({currentMoney: event.target.value}), () => {
-        //     this.calculateCrypto()
-        // }
+    handleMoneyCodeChange(event) {
+        this.setState({moneyCode: event.target.value}, () => {
+            this.calculateCrypto()
+        })
     }
 
     render() {
@@ -88,16 +79,14 @@ class Calculator extends Component {
                         <input
                             className='form__text-field'
                             min='1.00'
-                            name='numberCrypto'
-                            onChange={this.changeCrypto}
+                            onChange={this.handleCryptoChange}
                             step='1.00'
                             type='number'
-                            value={this.state.numberCrypto}
+                            value={this.state.textCrypto}
                         />
                         <select
                             className='form__select-field'
-                            name='selectCrypto'
-                            onChange={this.updateSelectCrypto}
+                            onChange={this.handleCryptoCodeChange}
                         >
                             <option value='btc'>Bitcoin</option>
                             <option value='eth'>Etherium</option>
@@ -108,16 +97,16 @@ class Calculator extends Component {
                         <input
                             className='form__text-field'
                             min='0.01'
-                            name='numberMoney'
-                            onChange={this.changeMoney}
+                            name='textMoney'
+                            onChange={this.handleMoneyChange}
                             step='1.00'
                             type='number'
-                            value={this.state.numberMoney}
+                            value={this.state.textMoney}
                         />
                         <select
                             className='form__select-field'
                             name='selectMoney'
-                            onChange={this.updateSelectMoney}
+                            onChange={this.handleMoneyCodeChange}
                         >
                             <option value='usd'>US Dollar</option>
                             <option value='gbp'>British Pound</option>

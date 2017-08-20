@@ -89,8 +89,11 @@ class HomePage extends Component {
                     bitcoinData={bitcoinRow}
                     ethereumData={ethereumRow}
                 />
+
                 <Calculator
+                    bitcoinGbpLast={this.props.bitcoin.isComplete && (this.props.bitcoin.bitcoin.price.gbp.last).toFixed(2)}
                     bitcoinUsdLast={this.props.bitcoin.isComplete && (this.props.bitcoin.bitcoin.price.usd.last).toFixed(2)}
+                    ethereumGbpLast={this.props.ethereum.isComplete && (this.props.ethereum.ethereum.price.gbp.last).toFixed(2)}
                     ethereumUsdLast={this.props.ethereum.isComplete && (this.props.ethereum.ethereum.price.usd.last).toFixed(2)}
                 />
             </div>

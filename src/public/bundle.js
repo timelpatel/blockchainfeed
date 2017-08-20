@@ -47869,7 +47869,9 @@ var HomePage = function (_Component) {
                     ethereumData: ethereumRow
                 }),
                 _react2.default.createElement(_index2.default, {
+                    bitcoinGbpLast: this.props.bitcoin.isComplete && this.props.bitcoin.bitcoin.price.gbp.last.toFixed(2),
                     bitcoinUsdLast: this.props.bitcoin.isComplete && this.props.bitcoin.bitcoin.price.usd.last.toFixed(2),
+                    ethereumGbpLast: this.props.ethereum.isComplete && this.props.ethereum.ethereum.price.gbp.last.toFixed(2),
                     ethereumUsdLast: this.props.ethereum.isComplete && this.props.ethereum.ethereum.price.usd.last.toFixed(2)
                 })
             );
@@ -47944,16 +47946,16 @@ var Calculator = function (_Component) {
         var _this = _possibleConstructorReturn(this, (Calculator.__proto__ || Object.getPrototypeOf(Calculator)).call(this, props));
 
         _this.state = {
-            currentCrypto: 'btc',
-            currentMoney: 'usd',
-            numberCrypto: 1.00,
-            numberMoney: _this.props.bitcoinUsdLast
+            cryptoCode: 'btc',
+            moneyCode: 'usd',
+            textCrypto: 1.00,
+            textMoney: _this.props.bitcoinUsdLast
         };
 
-        _this.changeMoney = _this.changeMoney.bind(_this);
-        _this.changeCrypto = _this.changeCrypto.bind(_this);
-        _this.updateSelectCrypto = _this.updateSelectCrypto.bind(_this);
-        _this.updateSelectMoney = _this.updateSelectMoney.bind(_this);
+        _this.handleMoneyChange = _this.handleMoneyChange.bind(_this);
+        _this.handleCryptoChange = _this.handleCryptoChange.bind(_this);
+        _this.handleCryptoCodeChange = _this.handleCryptoCodeChange.bind(_this);
+        _this.handleMoneyCodeChange = _this.handleMoneyCodeChange.bind(_this);
         return _this;
     }
 
@@ -47965,67 +47967,63 @@ var Calculator = function (_Component) {
             }
         }
     }, {
-        key: 'changeCrypto',
-        value: function changeCrypto(event) {
+        key: 'handleCryptoChange',
+        value: function handleCryptoChange(event) {
             var _this2 = this;
 
-            this.setState({ numberCrypto: event.target.value }, function () {
+            this.setState({ textCrypto: event.target.value }, function () {
                 _this2.calculateMoney();
             });
         }
     }, {
-        key: 'changeMoney',
-        value: function changeMoney(event) {
+        key: 'handleMoneyChange',
+        value: function handleMoneyChange(event) {
             var _this3 = this;
 
-            this.setState({ numberMoney: event.target.value }, function () {
+            this.setState({ textMoney: event.target.value }, function () {
                 _this3.calculateCrypto();
             });
-
-            // this.setState(prevState => (
-            //     {numberMoney: !prevState.numberMoney}, () => {
-            //         this.calculateCrypto()
-            //     }
-            // ))
         }
     }, {
         key: 'calculateCrypto',
         value: function calculateCrypto() {
-            var _this4 = this;
-
-            this.setState(function (prevState) {
-                return {
-                    numberCrypto: (_this4.state.numberMoney / _this4.props.bitcoinUsdLast).toFixed(2)
-                };
-            });
+            var cryptoRate = 0;
+            if (this.state.moneyCode === 'usd') {
+                cryptoRate = this.props.bitcoinUsdLast;
+            } else if (this.state.moneyCode === 'gbp') {
+                cryptoRate = this.props.bitcoinGbpLast;
+            }
+            this.setState({ textCrypto: (this.state.textMoney / cryptoRate).toFixed(2) });
         }
     }, {
         key: 'calculateMoney',
         value: function calculateMoney() {
             var cryptoRate = 0;
-            if (this.state.currentCrypto === 'btc') {
+            if (this.state.cryptoCode === 'btc') {
                 cryptoRate = this.props.bitcoinUsdLast;
-            } else if (this.state.currentCrypto === 'eth') {
+            } else if (this.state.cryptoCode === 'eth') {
                 cryptoRate = this.props.ethereumUsdLast;
             }
 
-            this.setState({ numberMoney: (cryptoRate * this.state.numberCrypto).toFixed(2) });
+            this.setState({ textMoney: (cryptoRate * this.state.textCrypto).toFixed(2) });
         }
     }, {
-        key: 'updateSelectCrypto',
-        value: function updateSelectCrypto(event) {
+        key: 'handleCryptoCodeChange',
+        value: function handleCryptoCodeChange(event) {
+            var _this4 = this;
+
+            this.setState({ cryptoCode: event.target.value }, function () {
+                _this4.calculateMoney();
+            });
+        }
+    }, {
+        key: 'handleMoneyCodeChange',
+        value: function handleMoneyCodeChange(event) {
             var _this5 = this;
 
-            this.setState({ currentCrypto: event.target.value }), function () {
-                _this5.calculateMoney();
-            };
-        }
-    }, {
-        key: 'updateSelectMoney',
-        value: function updateSelectMoney(event) {
-            // this.setState({currentMoney: event.target.value}), () => {
-            //     this.calculateCrypto()
-            // }
+            this.setState({ moneyCode: event.target.value }, function () {
+                _this5.calculateCrypto();
+            });
         }
     }, {
         key: 'render',
@@ -48047,18 +48045,16 @@ var Calculator = function (_Component) {
                         _react2.default.createElement('input', {
                             className: 'form__text-field',
                             min: '1.00',
-                            name: 'numberCrypto',
-                            onChange: this.changeCrypto,
+                            onChange: this.handleCryptoChange,
                             step: '1.00',
                             type: 'number',
-                            value: this.state.numberCrypto
+                            value: this.state.textCrypto
                         }),
                         _react2.default.createElement(
                             'select',
                             {
                                 className: 'form__select-field',
-                                name: 'selectCrypto',
-                                onChange: this.updateSelectCrypto
+                                onChange: this.handleCryptoCodeChange
                             },
                             _react2.default.createElement(
                                 'option',
@@ -48078,18 +48074,18 @@ var Calculator = function (_Component) {
                         _react2.default.createElement('input', {
                             className: 'form__text-field',
                             min: '0.01',
-                            name: 'numberMoney',
-                            onChange: this.changeMoney,
+                            name: 'textMoney',
+                            onChange: this.handleMoneyChange,
                             step: '1.00',
                             type: 'number',
-                            value: this.state.numberMoney
+                            value: this.state.textMoney
                         }),
                         _react2.default.createElement(
                             'select',
                             {
                                 className: 'form__select-field',
                                 name: 'selectMoney',
-                                onChange: this.updateSelectMoney
+                                onChange: this.handleMoneyCodeChange
                             },
                             _react2.default.createElement(
                                 'option',
