@@ -1,4 +1,4 @@
-export default function reducer(state={
+function bitcoin(state = {
     bitcoin: {},
     bitcoinHistorical: {},
     isComplete: false,
@@ -13,7 +13,7 @@ export default function reducer(state={
                 isFetching: true,
                 isComplete: false
            })
-           break;
+           break
 
        case "FETCH_BITCOIN_ERROR":
            return Object.assign({
@@ -22,7 +22,7 @@ export default function reducer(state={
                isComplete: false,
                isError: action.payload
            })
-           break;
+           break
 
         case "FETCH_BITCOIN_COMPLETE":
             return Object.assign({
@@ -31,7 +31,7 @@ export default function reducer(state={
                 isComplete: true,
                 bitcoin: action.payload
             })
-            break;
+            break
 
         case "FETCH_BITCOIN_HISTORICAL":
             return Object.assign({
@@ -39,7 +39,7 @@ export default function reducer(state={
                 isFetching: true,
                 isComplete: false
            })
-           break;
+           break
 
        case "FETCH_BITCOIN_HISTORICAL_ERROR":
            return Object.assign({
@@ -48,7 +48,7 @@ export default function reducer(state={
                isComplete: false,
                isError: action.payload
            })
-           break;
+           break
 
         case "FETCH_BITCOIN_HISTORICAL_COMPLETE":
             return Object.assign({
@@ -57,8 +57,11 @@ export default function reducer(state={
                 isComplete: true,
                 bitcoinHistorical: action.payload
             })
-            break;
+            break
     }
 
     return state
 }
+
+
+export default bitcoin

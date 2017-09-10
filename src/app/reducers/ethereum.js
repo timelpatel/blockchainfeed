@@ -1,4 +1,4 @@
-export default function reducer(state={
+function ethereum(state = {
     ethereum: {},
     isComplete: false,
     isError: false,
@@ -12,7 +12,7 @@ export default function reducer(state={
                 isFetching: true,
                 isComplete: false
            })
-           break;
+           break
 
        case "FETCH_ETHEREUM_ERROR":
            return Object.assign({
@@ -21,7 +21,7 @@ export default function reducer(state={
                isComplete: false,
                isError: action.payload
            })
-           break;
+           break
 
         case "FETCH_ETHEREUM_COMPLETE":
             return Object.assign({
@@ -30,8 +30,11 @@ export default function reducer(state={
                 isComplete: true,
                 ethereum: action.payload
             })
-            break;
+            break
     }
 
     return state
 }
+
+
+export default ethereum

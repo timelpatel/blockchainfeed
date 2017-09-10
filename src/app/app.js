@@ -19,10 +19,10 @@ const App = () => (
 
 
 ReactDOM.render(
-    <HashRouter history={customHistory}>
-        <Provider store={store}>
+    <Provider store={store}>
+        <HashRouter history={customHistory}>
             <App />
-        </Provider>
-    </HashRouter>,
+        </HashRouter>
+    </Provider>,
     document.getElementById('app')
 );

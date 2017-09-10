@@ -8,6 +8,7 @@ import ExchangeRates from '../../components/ExchangeRates/index.jsx'
 
 
 let bitcoinRow
+let ethereumRow
 
 class HomePage extends Component {
 
@@ -27,60 +28,49 @@ class HomePage extends Component {
             priceObj.last.toFixed(2)
         ];
 
-        // `${currencyName.toLowerCase()}Row` = priceAry.map((item, index) =>
-        bitcoinRow = priceAry.map((item, index) =>
-            <td key={index}>
-                {item}
-            </td>
-        )
+        if (currencyName == 'Bitcoin') {
+            // `${currencyName.toLowerCase()}Row` = priceAry.map((item, index) =>
+            bitcoinRow = priceAry.map((item, index) =>
+                <td key={index}>
+                    {item}
+                </td>
+            )
+        }
+
+        if (currencyName == 'Ethereum') {
+            ethereumRow = priceAry.map((item, index) =>
+                <td key={index}>
+                    {item}
+                </td>
+            )
+        }
     }
 
     render() {
         // Bitcoin row for Exchange Rate table
         if (this.props.bitcoin.isComplete) {
-            this.createCurrencyCols(this.props.bitcoin.bitcoin.name, this.props.bitcoin.bitcoin.price.usd)
-        }
 
-        // let bitcoinRow = ''
-        //
-        // if (this.props.bitcoin.isComplete) {
-        //     const priceObj = this.props.bitcoin.bitcoin.price.usd
-        //
-        //     const priceAry = [
-        //         this.props.bitcoin.bitcoin.name,
-        //         priceObj.open.toFixed(2),
-        //         priceObj.high.toFixed(2),
-        //         priceObj.low.toFixed(2),
-        //         `${priceObj.change}%`,
-        //         priceObj.last.toFixed(2)
-        //     ]
-        //
-        //     bitcoinRow = priceAry.map((item, index) =>
-        //         <td key={index}>
-        //             {item}
-        //         </td>
-        //     )
-        // }
+            if (this.props.app.moneyCode === 'usd') {
+                this.createCurrencyCols(this.props.bitcoin.bitcoin.name, this.props.bitcoin.bitcoin.price.usd)
+            }
+            else if (this.props.app.moneyCode === 'gbp') {
+                this.createCurrencyCols(this.props.bitcoin.bitcoin.name, this.props.bitcoin.bitcoin.price.gbp)
+            }
+
+        }
 
         // Ethereum row for Exchange Rate table
-        let ethereumRow = ''
-
         if (this.props.ethereum.isComplete) {
-            const priceObj = this.props.ethereum.ethereum.price.usd
 
-            const priceAry = [
-                this.props.ethereum.ethereum.name,
-                priceObj.open.toFixed(2),
-                priceObj.high.toFixed(2),
-                priceObj.low.toFixed(2),
-                `${priceObj.change}%`,
-                priceObj.last.toFixed(2)
-            ]
+            if (this.props.app.moneyCode === 'usd') {
+                this.createCurrencyCols(this.props.ethereum.ethereum.name, this.props.ethereum.ethereum.price.usd)
+            }
+            else if (this.props.app.moneyCode === 'gbp') {
+                this.createCurrencyCols(this.props.ethereum.ethereum.name, this.props.ethereum.ethereum.price.gbp)
+            }
 
-            ethereumRow = priceAry.map((item, index) =>
-                <td key={index}>{item}</td>
-            )
         }
+
 
         return (
 
@@ -106,11 +96,9 @@ class HomePage extends Component {
 
 const mapStateToProps = (state) => {
     return {
+        app: state.app,
         bitcoin: state.bitcoin,
-        ethereum: state.ethereum,
-        isComplete: state.isComplete,
-        isError: state.isError,
-        isFetching: state.isFetching
+        ethereum: state.ethereum
     }
 }
 

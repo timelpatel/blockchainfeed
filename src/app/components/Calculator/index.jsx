@@ -1,8 +1,4 @@
 import React, {Component} from 'react'
-import {bindActionCreators} from 'redux'
-import {connect} from 'react-redux'
-import {fetchBitcoin} from '../../actions/bitcoin.js'
-import {fetchEthereum} from '../../actions/ethereum.js'
 import style from './style.scss'
 
 

@@ -1,6 +1,7 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 import style from './style.scss'
+import HeaderNav from '../../containers/HeaderNav/index.jsx'
 
 
 const Header = () => (
@@ -11,7 +12,9 @@ const Header = () => (
         >
             <h1 className='header__h1'>TIMELAB DATA</h1>
         </Link>
+
+        <HeaderNav />
     </header>
 )
 
-export default Header;
+export default Header

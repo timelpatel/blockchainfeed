@@ -5,7 +5,7 @@ import axios from "axios"
 export function fetchBitcoin() {
 
     return dispatch => {
-        dispatch({type: "FETCH_BITCOIN"});
+        dispatch({type: "FETCH_BITCOIN"})
 
         axios.get('http://localhost:3030/_stub/btc.json')
         // axios.get('http://api.coindesk.com/v1/bpi/currentprice.json')
@@ -29,7 +29,7 @@ export function fetchBitcoin() {
 export function fetchBitcoinHistorical() {
 
     return dispatch => {
-        dispatch({type: "FETCH_BITCOIN_HISTORICAL"});
+        dispatch({type: "FETCH_BITCOIN_HISTORICAL"})
 
         axios.get('http://localhost:3030/_stub/bitcoin-historical-data-static.json')
         // axios.get('http://localhost:3030/_stub/bitcoin-historical-data-static.csv')
