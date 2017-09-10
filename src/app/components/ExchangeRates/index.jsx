@@ -23,6 +23,7 @@ const ExchangeRates = (props) => (
                 <tbody>
                     <tr>{props.bitcoinData}</tr>
                     <tr>{props.ethereumData}</tr>
+                    <tr>{props.litecoinData}</tr>
                 </tbody>
             </table>
 

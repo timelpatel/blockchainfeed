@@ -1,0 +1,25 @@
+{
+    "name":"Litecoin",
+    "code":"LTC",
+    "timestamp":"1502393471135",
+    "price": {
+        "gbp": {
+            "symbol":"&pound;",
+            "last":53.3453,
+            "high":63.3464,
+            "low":46.3252,
+            "open":62.9734,
+            "change":-17,
+            "volume":124789
+        },
+        "usd": {
+            "symbol":"&#36;",
+            "last":63.7524,
+            "high":73.9283,
+            "low":56.3423,
+            "open":72.2349,
+            "change":-13,
+            "volume":124789
+        }
+    }
+}
