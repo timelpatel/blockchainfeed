@@ -23,7 +23,7 @@
 }
 
 .nav__menu {
-    background: #333;
+    background: #2d2d2d;
     color: #fff;
     font-size: 12px;
     position: absolute;
@@ -35,7 +35,7 @@
         padding: 10px;
 
         &:hover {
-            background: #303030;
+            background: #222;
             color: #09c;
         }
 
@@ -45,18 +45,18 @@
     }
 
     // MOVE THIS
-    p {
+    p.text__body-header-nav {
         color: #cdcdcd;
         padding: 20px;
     }
 }
 
-.overlay__mask {
-    background: #fff;
-    bottom: 0;
-    left: 0;
-    opacity: 0.7;
-    position: fixed;
-    right: 0;
-    top: 0;
-}
+// .overlay__mask {
+//     background: #fff;
+//     bottom: 0;
+//     left: 0;
+//     opacity: 0.7;
+//     position: fixed;
+//     right: 0;
+//     top: 0;
+// }

@@ -54,9 +54,8 @@ class HeaderNav extends Component {
 
                 {this.state.showNav &&
                     <div className='nav__menu'>
-                        <p>Current currency - {this.props.moneyCode.toUpperCase()}</p>
+                        <p className='text__body-copy text__body-header-nav'>Current currency - {this.props.moneyCode.toUpperCase()}</p>
                         <ul>{listMoneyCodes}</ul>
-                        {/* <div className='overlay__mask'></div> */}
                     </div>
                 }
             </div>

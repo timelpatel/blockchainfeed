@@ -1,0 +1,21 @@
+/*
+    Timelab Data
+    Base SASS
+*/
+
+@import 'reset';
+@import 'fonts';
+@import 'form';
+@import 'table';
+
+
+
+body {
+    background: #efefef;
+    font-family: verdana;
+    min-width: 480px;
+}
+
+.container__page {
+    margin: 20px;
+}
