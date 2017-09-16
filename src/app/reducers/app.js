@@ -1,5 +1,20 @@
 const app = (state = {
-    moneyCode: 'usd'
+    currencies: {
+        'bitcoin': {
+            code: 'btc',
+            name: 'Bitcoin'
+        },
+        'ethereum': {
+            code: 'eth',
+            name: 'Ethereum'
+        },
+        'litecoin': {
+            code: 'ltc',
+            name: 'Litecoin'
+        }
+    },
+    moneyCode: 'usd',
+    moneyCodes: ['gbp','usd']
 }, action) => {
 
     switch (action.type) {

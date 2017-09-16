@@ -47807,11 +47807,26 @@ var HomePage = function (_Component) {
         }
     }, {
         key: 'createCurrencyCols',
-        value: function createCurrencyCols(currencyName, priceObj) {
+        value: function createCurrencyCols(currencyName) {
+
+            if (currencyName === 'Bitcoin') {
+                var priceObj = this.props.bitcoin.bitcoin.price[this.props.app.moneyCode];
+            } else if (currencyName === 'Ethereum') {
+                var priceObj = this.props.ethereum.ethereum.price[this.props.app.moneyCode];
+            } else if (currencyName === 'Litecoin') {
+                var priceObj = this.props.litecoin.litecoin.price[this.props.app.moneyCode];
+            }
 
             var priceAry = [currencyName, priceObj.open.toFixed(2), priceObj.high.toFixed(2), priceObj.low.toFixed(2), priceObj.change + '%', priceObj.last.toFixed(2)];
 
-            if (currencyName == 'Bitcoin') {
+            // let rowNamex = `${currencyName.toLowerCase()}Row`
+            // rowNamex = priceAry.map((item, index) =>
+            //     <td key={index}>
+            //         {item}
+            //     </td>
+            // )
+
+            if (currencyName === 'Bitcoin') {
                 // `${currencyName.toLowerCase()}Row` = priceAry.map((item, index) =>
                 bitcoinRow = priceAry.map(function (item, index) {
                     return _react2.default.createElement(
@@ -47820,9 +47835,7 @@ var HomePage = function (_Component) {
                         item
                     );
                 });
-            }
-
-            if (currencyName == 'Ethereum') {
+            } else if (currencyName === 'Ethereum') {
                 ethereumRow = priceAry.map(function (item, index) {
                     return _react2.default.createElement(
                         'td',
@@ -47830,9 +47843,7 @@ var HomePage = function (_Component) {
                         item
                     );
                 });
-            }
-
-            if (currencyName == 'Litecoin') {
+            } else if (currencyName === 'Litecoin') {
                 litecoinRow = priceAry.map(function (item, index) {
                     return _react2.default.createElement(
                         'td',
@@ -47845,31 +47856,20 @@ var HomePage = function (_Component) {
     }, {
         key: 'render',
         value: function render() {
-            // Bitcoin row for Exchange Rate table
+
+            // get bitcoin row for Exchange Rate table
             if (this.props.bitcoin.isComplete) {
-                if (this.props.app.moneyCode === 'usd') {
-                    this.createCurrencyCols(this.props.bitcoin.bitcoin.name, this.props.bitcoin.bitcoin.price.usd);
-                } else if (this.props.app.moneyCode === 'gbp') {
-                    this.createCurrencyCols(this.props.bitcoin.bitcoin.name, this.props.bitcoin.bitcoin.price.gbp);
-                }
+                this.createCurrencyCols('Bitcoin');
             }
 
-            // Ethereum row for Exchange Rate table
+            // get ethereum row for Exchange Rate table
             if (this.props.ethereum.isComplete) {
-                if (this.props.app.moneyCode === 'usd') {
-                    this.createCurrencyCols(this.props.ethereum.ethereum.name, this.props.ethereum.ethereum.price.usd);
-                } else if (this.props.app.moneyCode === 'gbp') {
-                    this.createCurrencyCols(this.props.ethereum.ethereum.name, this.props.ethereum.ethereum.price.gbp);
-                }
+                this.createCurrencyCols('Ethereum');
             }
 
-            // Litecoin row for Exchange Rate table
+            // get litecoin row for Exchange Rate table
             if (this.props.litecoin.isComplete) {
-                if (this.props.app.moneyCode === 'usd') {
-                    this.createCurrencyCols(this.props.litecoin.litecoin.name, this.props.litecoin.litecoin.price.usd);
-                } else if (this.props.app.moneyCode === 'gbp') {
-                    this.createCurrencyCols(this.props.litecoin.litecoin.name, this.props.litecoin.litecoin.price.gbp);
-                }
+                this.createCurrencyCols('Litecoin');
             }
 
             return _react2.default.createElement(
@@ -48435,7 +48435,22 @@ Object.defineProperty(exports, "__esModule", {
 });
 var app = function app() {
     var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {
-        moneyCode: 'usd'
+        currencies: {
+            'bitcoin': {
+                code: 'btc',
+                name: 'Bitcoin'
+            },
+            'ethereum': {
+                code: 'eth',
+                name: 'Ethereum'
+            },
+            'litecoin': {
+                code: 'ltc',
+                name: 'Litecoin'
+            }
+        },
+        moneyCode: 'usd',
+        moneyCodes: ['gbp', 'usd']
     };
     var action = arguments[1];
 
@@ -48922,7 +48937,7 @@ exports = module.exports = __webpack_require__(17)(undefined);
 
 
 // module
-exports.push([module.i, ".nav__button {\n  border: 0;\n  cursor: pointer;\n  height: 30px;\n  outline: none;\n  position: absolute;\n  right: 20px;\n  top: 16px;\n  width: 30px;\n  background-color: #fff;\n  -webkit-mask: url(/assets/img/icon-menu.svg) no-repeat;\n  mask: url(/assets/img/icon-menu.svg) no-repeat;\n  mask-size: 30px;\n  -webkit-mask-size: 30px;\n  text-indent: 1000px; }\n  .nav__button.open {\n    -webkit-mask: url(/assets/img/icon-close.svg) no-repeat;\n    mask: url(/assets/img/icon-close.svg) no-repeat; }\n\n.nav__menu {\n  background: #2d2d2d;\n  color: #fff;\n  font-size: 12px;\n  position: absolute;\n  right: 0;\n  top: 60px; }\n  .nav__menu li {\n    cursor: pointer;\n    padding: 10px; }\n    .nav__menu li:hover {\n      background: #222;\n      color: #09c; }\n    .nav__menu li:last-child {\n      margin-bottom: 0; }\n  .nav__menu p.text__body-header-nav {\n    color: #cdcdcd;\n    padding: 20px; }\n", ""]);
+exports.push([module.i, ".nav__button {\n  border: 0;\n  cursor: pointer;\n  height: 30px;\n  outline: none;\n  position: absolute;\n  right: 20px;\n  top: 16px;\n  width: 30px;\n  background-color: #fff;\n  -webkit-mask: url(/assets/img/icon-menu.svg) no-repeat;\n  mask: url(/assets/img/icon-menu.svg) no-repeat;\n  mask-size: 30px;\n  -webkit-mask-size: 30px;\n  text-indent: 1000px; }\n  .nav__button.open {\n    -webkit-mask: url(/assets/img/icon-close.svg) no-repeat;\n    mask: url(/assets/img/icon-close.svg) no-repeat; }\n\n.nav__menu {\n  background: #2d2d2d;\n  color: #fff;\n  font-size: 12px;\n  position: absolute;\n  right: 0;\n  top: 60px; }\n  .nav__menu li {\n    cursor: pointer;\n    padding: 15px; }\n    .nav__menu li:hover {\n      background: #222;\n      color: #09c; }\n    .nav__menu li:last-child {\n      margin-bottom: 0; }\n  .nav__menu p.text__body-header-nav {\n    color: #cdcdcd;\n    padding: 20px; }\n", ""]);
 
 // exports
 

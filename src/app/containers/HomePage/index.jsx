@@ -12,6 +12,7 @@ let bitcoinRow
 let ethereumRow
 let litecoinRow
 
+
 class HomePage extends Component {
 
     componentDidMount() {
@@ -20,18 +21,35 @@ class HomePage extends Component {
         this.props.fetchLitecoin()
     }
 
-    createCurrencyCols(currencyName, priceObj) {
+    createCurrencyCols(currencyName) {
 
-        const priceAry = [
+        if (currencyName === 'Bitcoin') {
+            var priceObj = this.props.bitcoin.bitcoin.price[this.props.app.moneyCode]
+        }
+        else if (currencyName === 'Ethereum') {
+            var priceObj = this.props.ethereum.ethereum.price[this.props.app.moneyCode]
+        }
+        else if (currencyName === 'Litecoin') {
+            var priceObj = this.props.litecoin.litecoin.price[this.props.app.moneyCode]
+        }
+
+        let priceAry = [
             currencyName,
             priceObj.open.toFixed(2),
             priceObj.high.toFixed(2),
             priceObj.low.toFixed(2),
             `${priceObj.change}%`,
             priceObj.last.toFixed(2)
-        ];
+        ]
 
-        if (currencyName == 'Bitcoin') {
+        // let rowNamex = `${currencyName.toLowerCase()}Row`
+        // rowNamex = priceAry.map((item, index) =>
+        //     <td key={index}>
+        //         {item}
+        //     </td>
+        // )
+
+        if (currencyName === 'Bitcoin') {
             // `${currencyName.toLowerCase()}Row` = priceAry.map((item, index) =>
             bitcoinRow = priceAry.map((item, index) =>
                 <td key={index}>
@@ -40,7 +58,7 @@ class HomePage extends Component {
             )
         }
 
-        if (currencyName == 'Ethereum') {
+        else if (currencyName === 'Ethereum') {
             ethereumRow = priceAry.map((item, index) =>
                 <td key={index}>
                     {item}
@@ -48,44 +66,31 @@ class HomePage extends Component {
             )
         }
 
-        if (currencyName == 'Litecoin') {
+        else if (currencyName === 'Litecoin') {
             litecoinRow = priceAry.map((item, index) =>
                 <td key={index}>
                     {item}
                 </td>
             )
         }
+
     }
 
     render() {
-        // Bitcoin row for Exchange Rate table
+
+        // get bitcoin row for Exchange Rate table
         if (this.props.bitcoin.isComplete) {
-            if (this.props.app.moneyCode === 'usd') {
-                this.createCurrencyCols(this.props.bitcoin.bitcoin.name, this.props.bitcoin.bitcoin.price.usd)
-            }
-            else if (this.props.app.moneyCode === 'gbp') {
-                this.createCurrencyCols(this.props.bitcoin.bitcoin.name, this.props.bitcoin.bitcoin.price.gbp)
-            }
+            this.createCurrencyCols('Bitcoin')
         }
 
-        // Ethereum row for Exchange Rate table
+        // get ethereum row for Exchange Rate table
         if (this.props.ethereum.isComplete) {
-            if (this.props.app.moneyCode === 'usd') {
-                this.createCurrencyCols(this.props.ethereum.ethereum.name, this.props.ethereum.ethereum.price.usd)
-            }
-            else if (this.props.app.moneyCode === 'gbp') {
-                this.createCurrencyCols(this.props.ethereum.ethereum.name, this.props.ethereum.ethereum.price.gbp)
-            }
+            this.createCurrencyCols('Ethereum')
         }
 
-        // Litecoin row for Exchange Rate table
+        // get litecoin row for Exchange Rate table
         if (this.props.litecoin.isComplete) {
-            if (this.props.app.moneyCode === 'usd') {
-                this.createCurrencyCols(this.props.litecoin.litecoin.name, this.props.litecoin.litecoin.price.usd)
-            }
-            else if (this.props.app.moneyCode === 'gbp') {
-                this.createCurrencyCols(this.props.litecoin.litecoin.name, this.props.litecoin.litecoin.price.gbp)
-            }
+            this.createCurrencyCols('Litecoin')
         }
 
 
