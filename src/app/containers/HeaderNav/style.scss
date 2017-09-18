@@ -14,7 +14,7 @@
     mask-size: 30px;
     -webkit-mask-size: 30px;
 
-    text-indent: 1000px; // CHANGE THIS
+    // text-indent: 1000px;
 
     &.open {
         -webkit-mask: url(/assets/img/icon-close.svg) no-repeat;
@@ -43,12 +43,15 @@
             margin-bottom: 0;
         }
     }
+}
 
-    // MOVE THIS
-    p.text__body-header-nav {
-        color: #cdcdcd;
-        padding: 20px;
-    }
+.nav__money-code {
+    color: #fff;
+    font-size: 12px;
+    position: absolute;
+    right: 70px;
+    text-transform: uppercase;
+    top: 26px;
 }
 
 // .overlay__mask {

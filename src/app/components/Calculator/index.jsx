@@ -49,7 +49,6 @@ class Calculator extends Component {
         if (this.state.cryptoCode === 'btc') {cryptoRate = this.props.bitcoinUsdLast}
         else if (this.state.cryptoCode === 'eth') {cryptoRate = this.props.ethereumUsdLast}
         else if (this.state.cryptoCode === 'ltc') {cryptoRate = this.props.litecoinUsdLast}
-
         this.setState({ textMoney: (cryptoRate * this.state.textCrypto).toFixed(2) })
     }
 

@@ -47,14 +47,14 @@ class HeaderNav extends Component {
         return (
 
             <div>
+                <p className='nav__money-code'>{this.props.moneyCode}</p>
                 <button
                     className='nav__button'
                     onClick={this.handleShowNav}
-                >Menu</button>
+                ><span className='text-hide'>Menu</span></button>
 
                 {this.state.showNav &&
                     <div className='nav__menu'>
-                        <p className='text__body-copy text__body-header-nav'>Current currency - {this.props.moneyCode.toUpperCase()}</p>
                         <ul>{listMoneyCodes}</ul>
                     </div>
                 }
@@ -68,7 +68,9 @@ class HeaderNav extends Component {
 
 const mapStateToProps = (state) => {
     return {
-        moneyCode: state.app.moneyCode
+        moneyCode: state.app.moneyCode,
+        // moneyGbpSymbol: state.app.price.gbp.symbol,
+        // moneyUsdSymbol: state.app.price.usd.symbol
     }
 }
 

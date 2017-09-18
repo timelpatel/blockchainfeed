@@ -28088,7 +28088,10 @@ var BitcoinPage = function (_Component) {
                 _react2.default.createElement(
                     'h2',
                     { className: 'text__h2' },
-                    'Bitcoin (BTC)'
+                    this.props.bitcoin.isComplete && this.props.bitcoin.bitcoin.name,
+                    ' (',
+                    this.props.bitcoin.isComplete && this.props.bitcoin.bitcoin.code,
+                    ')'
                 ),
                 this.props.bitcoin.isFetching && _react2.default.createElement(
                     'p',
@@ -28100,8 +28103,19 @@ var BitcoinPage = function (_Component) {
                     { style: _style2.default.bodyCopy },
                     'Data not available.'
                 ),
-                this.props.bitcoin.isComplete && _react2.default.createElement(_index2.default, {
-                    bitcoinUsdLast: this.props.bitcoin.bitcoin.price.usd.last.toFixed(2)
+                this.props.bitcoin.isComplete && this.props.app.moneyCode === 'gbp' && _react2.default.createElement(_index2.default, {
+                    bitcoinUsdLast: '£' + this.props.bitcoin.bitcoin.price.gbp.last.toFixed(2),
+                    bitcoinUsdOpen: this.props.bitcoin.bitcoin.price.gbp.open.toFixed(2),
+                    bitcoinUsdHigh: this.props.bitcoin.bitcoin.price.gbp.high.toFixed(2),
+                    bitcoinUsdLow: this.props.bitcoin.bitcoin.price.gbp.low.toFixed(2),
+                    bitcoinUsdChange: this.props.bitcoin.bitcoin.price.gbp.change + '%'
+                }),
+                this.props.bitcoin.isComplete && this.props.app.moneyCode === 'usd' && _react2.default.createElement(_index2.default, {
+                    bitcoinUsdLast: '$' + this.props.bitcoin.bitcoin.price.usd.last.toFixed(2),
+                    bitcoinUsdOpen: this.props.bitcoin.bitcoin.price.usd.open.toFixed(2),
+                    bitcoinUsdHigh: this.props.bitcoin.bitcoin.price.usd.high.toFixed(2),
+                    bitcoinUsdLow: this.props.bitcoin.bitcoin.price.usd.low.toFixed(2),
+                    bitcoinUsdChange: this.props.bitcoin.bitcoin.price.usd.change + '%'
                 }),
                 _react2.default.createElement(_index4.default, {
                     data: '../../../_stub/bitcoin-historical-data-static.json'
@@ -28115,6 +28129,7 @@ var BitcoinPage = function (_Component) {
 
 var mapStateToProps = function mapStateToProps(state) {
     return {
+        app: state.app,
         bitcoin: state.bitcoin,
         isComplete: state.isComplete,
         isError: state.isError,
@@ -30253,18 +30268,77 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 var BitcoinBadge = function BitcoinBadge(props) {
 
     return _react2.default.createElement(
-        'div',
-        { className: 'container__blockCurrency' },
+        'table',
+        { className: 'table__exchange-rates' },
         _react2.default.createElement(
-            'p',
-            { className: 'text__bodyCopy text__bold' },
-            'BTC / Bitcoin'
+            'thead',
+            null,
+            _react2.default.createElement(
+                'tr',
+                null,
+                _react2.default.createElement(
+                    'th',
+                    null,
+                    'Last'
+                ),
+                _react2.default.createElement(
+                    'th',
+                    null,
+                    'Open'
+                ),
+                _react2.default.createElement(
+                    'th',
+                    null,
+                    'High'
+                ),
+                _react2.default.createElement(
+                    'th',
+                    null,
+                    'Low'
+                ),
+                _react2.default.createElement(
+                    'th',
+                    null,
+                    'Change'
+                )
+            )
         ),
         _react2.default.createElement(
-            'p',
-            { className: 'text__bodyCopy' },
-            '$',
-            props.bitcoinUsdLast
+            'tbody',
+            null,
+            _react2.default.createElement(
+                'tr',
+                null,
+                _react2.default.createElement(
+                    'td',
+                    null,
+                    _react2.default.createElement(
+                        'strong',
+                        null,
+                        props.bitcoinUsdLast
+                    )
+                ),
+                _react2.default.createElement(
+                    'td',
+                    null,
+                    props.bitcoinUsdOpen
+                ),
+                _react2.default.createElement(
+                    'td',
+                    null,
+                    props.bitcoinUsdHigh
+                ),
+                _react2.default.createElement(
+                    'td',
+                    null,
+                    props.bitcoinUsdLow
+                ),
+                _react2.default.createElement(
+                    'td',
+                    null,
+                    props.bitcoinUsdChange
+                )
+            )
         )
     );
 };
@@ -30311,7 +30385,7 @@ exports = module.exports = __webpack_require__(17)(undefined);
 
 
 // module
-exports.push([module.i, ".container__blockCurrency {\n  background: #fff;\n  border-radius: 6px;\n  padding: 20px;\n  text-align: center;\n  width: 150px; }\n", ""]);
+exports.push([module.i, "", ""]);
 
 // exports
 
@@ -47881,6 +47955,7 @@ var HomePage = function (_Component) {
                     litecoinData: litecoinRow
                 }),
                 _react2.default.createElement(_index2.default, {
+                    moneyCode: this.props.app.moneyCode,
                     bitcoinGbpLast: this.props.bitcoin.isComplete && this.props.bitcoin.bitcoin.price.gbp.last.toFixed(2),
                     bitcoinUsdLast: this.props.bitcoin.isComplete && this.props.bitcoin.bitcoin.price.usd.last.toFixed(2),
                     ethereumGbpLast: this.props.ethereum.isComplete && this.props.ethereum.ethereum.price.gbp.last.toFixed(2),
@@ -48053,7 +48128,6 @@ var Calculator = function (_Component) {
             } else if (this.state.cryptoCode === 'ltc') {
                 cryptoRate = this.props.litecoinUsdLast;
             }
-
             this.setState({ textMoney: (cryptoRate * this.state.textCrypto).toFixed(2) });
         }
     }, {
@@ -48835,22 +48909,25 @@ var HeaderNav = function (_Component) {
                 'div',
                 null,
                 _react2.default.createElement(
+                    'p',
+                    { className: 'nav__money-code' },
+                    this.props.moneyCode
+                ),
+                _react2.default.createElement(
                     'button',
                     {
                         className: 'nav__button',
                         onClick: this.handleShowNav
                     },
-                    'Menu'
+                    _react2.default.createElement(
+                        'span',
+                        { className: 'text-hide' },
+                        'Menu'
+                    )
                 ),
                 this.state.showNav && _react2.default.createElement(
                     'div',
                     { className: 'nav__menu' },
-                    _react2.default.createElement(
-                        'p',
-                        { className: 'text__body-copy text__body-header-nav' },
-                        'Current currency - ',
-                        this.props.moneyCode.toUpperCase()
-                    ),
                     _react2.default.createElement(
                         'ul',
                         null,
@@ -48867,6 +48944,8 @@ var HeaderNav = function (_Component) {
 var mapStateToProps = function mapStateToProps(state) {
     return {
         moneyCode: state.app.moneyCode
+        // moneyGbpSymbol: state.app.price.gbp.symbol,
+        // moneyUsdSymbol: state.app.price.usd.symbol
     };
 };
 
@@ -48937,7 +49016,7 @@ exports = module.exports = __webpack_require__(17)(undefined);
 
 
 // module
-exports.push([module.i, ".nav__button {\n  border: 0;\n  cursor: pointer;\n  height: 30px;\n  outline: none;\n  position: absolute;\n  right: 20px;\n  top: 16px;\n  width: 30px;\n  background-color: #fff;\n  -webkit-mask: url(/assets/img/icon-menu.svg) no-repeat;\n  mask: url(/assets/img/icon-menu.svg) no-repeat;\n  mask-size: 30px;\n  -webkit-mask-size: 30px;\n  text-indent: 1000px; }\n  .nav__button.open {\n    -webkit-mask: url(/assets/img/icon-close.svg) no-repeat;\n    mask: url(/assets/img/icon-close.svg) no-repeat; }\n\n.nav__menu {\n  background: #2d2d2d;\n  color: #fff;\n  font-size: 12px;\n  position: absolute;\n  right: 0;\n  top: 60px; }\n  .nav__menu li {\n    cursor: pointer;\n    padding: 15px; }\n    .nav__menu li:hover {\n      background: #222;\n      color: #09c; }\n    .nav__menu li:last-child {\n      margin-bottom: 0; }\n  .nav__menu p.text__body-header-nav {\n    color: #cdcdcd;\n    padding: 20px; }\n", ""]);
+exports.push([module.i, ".nav__button {\n  border: 0;\n  cursor: pointer;\n  height: 30px;\n  outline: none;\n  position: absolute;\n  right: 20px;\n  top: 16px;\n  width: 30px;\n  background-color: #fff;\n  -webkit-mask: url(/assets/img/icon-menu.svg) no-repeat;\n  mask: url(/assets/img/icon-menu.svg) no-repeat;\n  mask-size: 30px;\n  -webkit-mask-size: 30px; }\n  .nav__button.open {\n    -webkit-mask: url(/assets/img/icon-close.svg) no-repeat;\n    mask: url(/assets/img/icon-close.svg) no-repeat; }\n\n.nav__menu {\n  background: #2d2d2d;\n  color: #fff;\n  font-size: 12px;\n  position: absolute;\n  right: 0;\n  top: 60px; }\n  .nav__menu li {\n    cursor: pointer;\n    padding: 15px; }\n    .nav__menu li:hover {\n      background: #222;\n      color: #09c; }\n    .nav__menu li:last-child {\n      margin-bottom: 0; }\n\n.nav__money-code {\n  color: #fff;\n  font-size: 12px;\n  position: absolute;\n  right: 70px;\n  text-transform: uppercase;\n  top: 26px; }\n", ""]);
 
 // exports
 
@@ -48982,7 +49061,7 @@ exports = module.exports = __webpack_require__(17)(undefined);
 
 
 // module
-exports.push([module.i, "/*\n    Timelab Data\n    Base SASS\n*/\n/* http://meyerweb.com/eric/tools/css/reset/\n   v2.0 | 20110126\n   License: none (public domain)\n*/\nhtml, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, abbr, acronym, address, big, cite, code, del, dfn, em, img, ins, kbd, q, s, samp, small, strike, strong, sub, sup, tt, var, b, u, i, center, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td, article, aside, canvas, details, embed, figure, figcaption, footer, header, hgroup, menu, nav, output, ruby, section, summary, time, mark, audio, video {\n  margin: 0;\n  padding: 0;\n  border: 0;\n  font-size: 100%;\n  font: inherit;\n  vertical-align: baseline; }\n\narticle, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, section {\n  display: block; }\n\nbody {\n  line-height: 1; }\n\nol, ul {\n  list-style: none; }\n\nblockquote, q {\n  quotes: none; }\n\nblockquote:before, blockquote:after, q:before, q:after {\n  content: '';\n  content: none; }\n\ntable {\n  border-collapse: collapse;\n  border-spacing: 0; }\n\nh2.text__h2 {\n  color: #aaa;\n  font-family: arial-black;\n  font-size: 15px;\n  margin-bottom: 20px;\n  text-transform: uppercase; }\n\np.text__body-copy {\n  color: #363636;\n  font-size: 12px;\n  line-height: 2; }\n\n.text__bold {\n  font-weight: bold; }\n\na {\n  color: #09c; }\n\na:hover {\n  text-decoration: none; }\n\n.form__form-group {\n  margin-bottom: 20px; }\n  .form__form-group:last-child {\n    margin-bottom: 0; }\n\n.form__select-field {\n  font-size: 17px; }\n\n.form__text-field {\n  font-size: 24px;\n  margin-right: 20px;\n  padding: 10px;\n  text-align: right;\n  width: 50%; }\n\n.table__exchange-rates {\n  background: #fff;\n  border-radius: 6px;\n  font-size: 12px;\n  text-align: center;\n  width: 100%; }\n  .table__exchange-rates thead {\n    color: #aaa; }\n    .table__exchange-rates thead th:first-child {\n      text-align: left; }\n    .table__exchange-rates thead th {\n      border-bottom: 1px solid #efefef;\n      padding: 10px; }\n  .table__exchange-rates tbody td:first-child {\n    text-align: left; }\n  .table__exchange-rates tbody td {\n    padding: 10px; }\n\nbody {\n  background: #efefef;\n  font-family: verdana;\n  min-width: 480px; }\n\n.container__page {\n  margin: 20px; }\n", ""]);
+exports.push([module.i, "/*\n    Timelab Data\n    Base SASS\n*/\n/* http://meyerweb.com/eric/tools/css/reset/\n   v2.0 | 20110126\n   License: none (public domain)\n*/\nhtml, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, abbr, acronym, address, big, cite, code, del, dfn, em, img, ins, kbd, q, s, samp, small, strike, strong, sub, sup, tt, var, b, u, i, center, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td, article, aside, canvas, details, embed, figure, figcaption, footer, header, hgroup, menu, nav, output, ruby, section, summary, time, mark, audio, video {\n  margin: 0;\n  padding: 0;\n  border: 0;\n  font-size: 100%;\n  font: inherit;\n  vertical-align: baseline; }\n\narticle, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, section {\n  display: block; }\n\nbody {\n  line-height: 1; }\n\nol, ul {\n  list-style: none; }\n\nblockquote, q {\n  quotes: none; }\n\nblockquote:before, blockquote:after, q:before, q:after {\n  content: '';\n  content: none; }\n\ntable {\n  border-collapse: collapse;\n  border-spacing: 0; }\n\nh2.text__h2 {\n  color: #aaa;\n  font-family: arial-black;\n  font-size: 15px;\n  margin-bottom: 20px;\n  text-transform: uppercase; }\n\np.text__body-copy {\n  color: #363636;\n  font-size: 12px;\n  line-height: 2; }\n\n.text__bold,\nstrong {\n  font-weight: bold; }\n\na {\n  color: #09c; }\n  a:hover {\n    text-decoration: none; }\n\n.text-hide {\n  position: absolute;\n  top: -9999px;\n  left: -9999px; }\n\n.form__form-group {\n  margin-bottom: 20px; }\n  .form__form-group:last-child {\n    margin-bottom: 0; }\n\n.form__select-field {\n  font-size: 17px; }\n\n.form__text-field {\n  font-size: 24px;\n  margin-right: 20px;\n  padding: 10px;\n  text-align: right;\n  width: 50%; }\n\ntable.table__exchange-rates {\n  background: #fff;\n  border-radius: 6px;\n  font-size: 12px;\n  text-align: center;\n  width: 100%; }\n  table.table__exchange-rates thead {\n    color: #aaa; }\n    table.table__exchange-rates thead th:first-child {\n      text-align: left; }\n    table.table__exchange-rates thead th {\n      border-bottom: 1px solid #efefef;\n      padding: 10px; }\n  table.table__exchange-rates tbody td:first-child {\n    text-align: left; }\n  table.table__exchange-rates tbody td {\n    padding: 10px; }\n\nbody {\n  background: #efefef;\n  font-family: verdana;\n  min-width: 480px; }\n\n.container__page {\n  margin: 20px; }\n", ""]);
 
 // exports
 

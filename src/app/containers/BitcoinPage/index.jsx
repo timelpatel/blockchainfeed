@@ -17,13 +17,26 @@ class BitcoinPage extends Component {
         return (
 
             <div className='container__page'>
-                <h2 className='text__h2'>Bitcoin (BTC)</h2>
+                <h2 className='text__h2'>{this.props.bitcoin.isComplete && this.props.bitcoin.bitcoin.name} ({this.props.bitcoin.isComplete && this.props.bitcoin.bitcoin.code})</h2>
 
                 {this.props.bitcoin.isFetching && <p style={style.bodyCopy}>Loading...</p>}
                 {this.props.bitcoin.isError && <p style={style.bodyCopy}>Data not available.</p>}
-                {this.props.bitcoin.isComplete &&
+                {this.props.bitcoin.isComplete && this.props.app.moneyCode === 'gbp' &&
                     <BitcoinBadge
-                        bitcoinUsdLast={(this.props.bitcoin.bitcoin.price.usd.last).toFixed(2)}
+                        bitcoinUsdLast={'£' + (this.props.bitcoin.bitcoin.price.gbp.last).toFixed(2)}
+                        bitcoinUsdOpen={(this.props.bitcoin.bitcoin.price.gbp.open).toFixed(2)}
+                        bitcoinUsdHigh={(this.props.bitcoin.bitcoin.price.gbp.high).toFixed(2)}
+                        bitcoinUsdLow={(this.props.bitcoin.bitcoin.price.gbp.low).toFixed(2)}
+                        bitcoinUsdChange={(this.props.bitcoin.bitcoin.price.gbp.change) + '%'}
+                    />
+                }
+                {this.props.bitcoin.isComplete && this.props.app.moneyCode === 'usd' &&
+                    <BitcoinBadge
+                        bitcoinUsdLast={'$' + (this.props.bitcoin.bitcoin.price.usd.last).toFixed(2)}
+                        bitcoinUsdOpen={(this.props.bitcoin.bitcoin.price.usd.open).toFixed(2)}
+                        bitcoinUsdHigh={(this.props.bitcoin.bitcoin.price.usd.high).toFixed(2)}
+                        bitcoinUsdLow={(this.props.bitcoin.bitcoin.price.usd.low).toFixed(2)}
+                        bitcoinUsdChange={(this.props.bitcoin.bitcoin.price.usd.change) + '%'}
                     />
                 }
 
@@ -40,6 +53,7 @@ class BitcoinPage extends Component {
 
 const mapStateToProps = (state) => {
     return {
+        app: state.app,
         bitcoin: state.bitcoin,
         isComplete: state.isComplete,
         isError: state.isError,
