@@ -1,4 +1,5 @@
 const app = (state = {
+    currencyView: '',
     currencies: {
         'bitcoin': {
             code: 'btc',
@@ -18,6 +19,11 @@ const app = (state = {
 }, action) => {
 
     switch (action.type) {
+        case "SET_CURRENCY_VIEW":
+            return {
+                currencyView: action.currencyView
+            }
+
         case "SET_MONEY_CODE":
             return {
                 moneyCode: action.moneyCode

@@ -1,7 +1,8 @@
 import React, {Component} from 'react'
 import {bindActionCreators} from 'redux'
 import {connect} from 'react-redux'
-import {setMoneyCode} from '../../actions/app.js'
+import { Link } from 'react-router-dom'
+import {setCurrencyView, setMoneyCode} from '../../actions/app.js'
 import style from './style.scss'
 
 
@@ -40,9 +41,21 @@ class HeaderNav extends Component {
                 key={code}
                 onClick={this.handleMoneyCodeChange.bind(this, code)}
             >
-                {code.toUpperCase()}
+                <a href='#'>{code.toUpperCase()}</a>
             </li>
         )
+
+        const currencyCodes = ['bitcoin','ethereum','litecoin']
+        // const currencyCodes = this.props.currencies
+        const listCurrencyCodes = currencyCodes.map((code) =>
+            <li
+                key={code}
+                onClick={this.handleShowNav}
+            >
+                <Link to={code}>{code}</Link>
+            </li>
+        )
+
 
         return (
 
@@ -55,7 +68,14 @@ class HeaderNav extends Component {
 
                 {this.state.showNav &&
                     <div className='nav__menu'>
-                        <ul>{listMoneyCodes}</ul>
+                        <div className='nav__menu-list'>
+                            <p>Currency Information</p>
+                            <ul currencyView={this.props.currencyView}>{listCurrencyCodes}</ul>
+                        </div>
+                        <div className='nav__menu-list'>
+                            <p>Show money in...</p>
+                            <ul>{listMoneyCodes}</ul>
+                        </div>
                     </div>
                 }
             </div>
@@ -68,14 +88,19 @@ class HeaderNav extends Component {
 
 const mapStateToProps = (state) => {
     return {
-        moneyCode: state.app.moneyCode,
+        currencyView: state.app.currencyView,
+        currencies: state.app.currencies,
+        moneyCode: state.app.moneyCode
         // moneyGbpSymbol: state.app.price.gbp.symbol,
         // moneyUsdSymbol: state.app.price.usd.symbol
     }
 }
 
 const matchDispatchToProps = (dispatch) => {
-    return bindActionCreators({setMoneyCode: setMoneyCode}, dispatch)
+    return bindActionCreators({
+        setCurrencyView: setCurrencyView,
+        setMoneyCode: setMoneyCode
+    }, dispatch)
 }
 
 
