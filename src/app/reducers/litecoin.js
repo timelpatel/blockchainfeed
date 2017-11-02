@@ -7,33 +7,32 @@ function litecoin(state = {
 
     switch (action.type) {
         case "FETCH_LITECOIN":
-            return Object.assign({
-                state,
+            return {
+                ...state,
                 isFetching: true,
                 isComplete: false
-           })
-           break
+           }
 
        case "FETCH_LITECOIN_ERROR":
-           return Object.assign({
-               state,
+           return {
+               ...state,
                isFetching: false,
                isComplete: false,
                isError: action.payload
-           })
-           break
+           }
 
         case "FETCH_LITECOIN_COMPLETE":
-            return Object.assign({
-                state,
+            return {
+                ...state,
                 isFetching: false,
                 isComplete: true,
                 litecoin: action.payload
-            })
-            break
+            }
+
+        default:
+            return state
     }
 
-    return state
 }
 
 

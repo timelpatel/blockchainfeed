@@ -48507,6 +48507,9 @@ exports.default = allReducers;
 Object.defineProperty(exports, "__esModule", {
     value: true
 });
+
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
 var app = function app() {
     var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {
         currencyView: '',
@@ -48531,18 +48534,19 @@ var app = function app() {
 
 
     switch (action.type) {
-        case "SET_CURRENCY_VIEW":
-            return {
+        case 'SET_CURRENCY_VIEW':
+            return _extends({}, state, {
                 currencyView: action.currencyView
-            };
+            });
 
-        case "SET_MONEY_CODE":
-            return {
+        case 'SET_MONEY_CODE':
+            return _extends({}, state, {
                 moneyCode: action.moneyCode
-            };
-    }
+            });
 
-    return state;
+        default:
+            return state;
+    }
 };
 
 exports.default = app;
@@ -48557,6 +48561,9 @@ exports.default = app;
 Object.defineProperty(exports, "__esModule", {
     value: true
 });
+
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
 function bitcoin() {
     var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {
         bitcoin: {},
@@ -48570,59 +48577,48 @@ function bitcoin() {
 
     switch (action.type) {
         case "FETCH_BITCOIN":
-            return Object.assign({
-                state: state,
+            return _extends({}, state, {
                 isFetching: true,
                 isComplete: false
             });
-            break;
 
         case "FETCH_BITCOIN_ERROR":
-            return Object.assign({
-                state: state,
+            return _extends({}, state, {
                 isFetching: false,
                 isComplete: false,
                 isError: action.payload
             });
-            break;
 
         case "FETCH_BITCOIN_COMPLETE":
-            return Object.assign({
-                state: state,
+            return _extends({}, state, {
                 isFetching: false,
                 isComplete: true,
                 bitcoin: action.payload
             });
-            break;
 
         case "FETCH_BITCOIN_HISTORICAL":
-            return Object.assign({
-                state: state,
+            return _extends({}, state, {
                 isFetching: true,
                 isComplete: false
             });
-            break;
 
         case "FETCH_BITCOIN_HISTORICAL_ERROR":
-            return Object.assign({
-                state: state,
+            return _extends({}, state, {
                 isFetching: false,
                 isComplete: false,
                 isError: action.payload
             });
-            break;
 
         case "FETCH_BITCOIN_HISTORICAL_COMPLETE":
-            return Object.assign({
-                state: state,
+            return _extends({}, state, {
                 isFetching: false,
                 isComplete: true,
                 bitcoinHistorical: action.payload
             });
-            break;
-    }
 
-    return state;
+        default:
+            return state;
+    }
 }
 
 exports.default = bitcoin;
@@ -48637,6 +48633,9 @@ exports.default = bitcoin;
 Object.defineProperty(exports, "__esModule", {
     value: true
 });
+
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
 function ethereum() {
     var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {
         ethereum: {},
@@ -48649,33 +48648,28 @@ function ethereum() {
 
     switch (action.type) {
         case "FETCH_ETHEREUM":
-            return Object.assign({
-                state: state,
+            return _extends({}, state, {
                 isFetching: true,
                 isComplete: false
             });
-            break;
 
         case "FETCH_ETHEREUM_ERROR":
-            return Object.assign({
-                state: state,
+            return _extends({}, state, {
                 isFetching: false,
                 isComplete: false,
                 isError: action.payload
             });
-            break;
 
         case "FETCH_ETHEREUM_COMPLETE":
-            return Object.assign({
-                state: state,
+            return _extends({}, state, {
                 isFetching: false,
                 isComplete: true,
                 ethereum: action.payload
             });
-            break;
-    }
 
-    return state;
+        default:
+            return state;
+    }
 }
 
 exports.default = ethereum;
@@ -48690,6 +48684,9 @@ exports.default = ethereum;
 Object.defineProperty(exports, "__esModule", {
     value: true
 });
+
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
 function litecoin() {
     var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {
         litecoin: {},
@@ -48702,33 +48699,28 @@ function litecoin() {
 
     switch (action.type) {
         case "FETCH_LITECOIN":
-            return Object.assign({
-                state: state,
+            return _extends({}, state, {
                 isFetching: true,
                 isComplete: false
             });
-            break;
 
         case "FETCH_LITECOIN_ERROR":
-            return Object.assign({
-                state: state,
+            return _extends({}, state, {
                 isFetching: false,
                 isComplete: false,
                 isError: action.payload
             });
-            break;
 
         case "FETCH_LITECOIN_COMPLETE":
-            return Object.assign({
-                state: state,
+            return _extends({}, state, {
                 isFetching: false,
                 isComplete: true,
                 litecoin: action.payload
             });
-            break;
-    }
 
-    return state;
+        default:
+            return state;
+    }
 }
 
 exports.default = litecoin;
@@ -48967,7 +48959,7 @@ var HeaderNav = function (_Component) {
                         ),
                         _react2.default.createElement(
                             'ul',
-                            { currencyView: this.props.currencyView },
+                            null,
                             listCurrencyCodes
                         )
                     ),

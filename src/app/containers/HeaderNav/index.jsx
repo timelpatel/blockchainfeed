@@ -70,7 +70,8 @@ class HeaderNav extends Component {
                     <div className='nav__menu'>
                         <div className='nav__menu-list'>
                             <p>Currency Information</p>
-                            <ul currencyView={this.props.currencyView}>{listCurrencyCodes}</ul>
+                            {/* <ul currencyView={this.props.currencyView}>{listCurrencyCodes}</ul> */}
+                            <ul>{listCurrencyCodes}</ul>
                         </div>
                         <div className='nav__menu-list'>
                             <p>Show money in...</p>

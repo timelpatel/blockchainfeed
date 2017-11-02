@@ -8,59 +8,55 @@ function bitcoin(state = {
 
     switch (action.type) {
         case "FETCH_BITCOIN":
-            return Object.assign({
-                state,
+            return {
+                ...state,
                 isFetching: true,
                 isComplete: false
-           })
-           break
+           }
 
        case "FETCH_BITCOIN_ERROR":
-           return Object.assign({
-               state,
+           return {
+               ...state,
                isFetching: false,
                isComplete: false,
                isError: action.payload
-           })
-           break
+           }
 
         case "FETCH_BITCOIN_COMPLETE":
-            return Object.assign({
-                state,
+            return {
+                ...state,
                 isFetching: false,
                 isComplete: true,
                 bitcoin: action.payload
-            })
-            break
+            }
 
         case "FETCH_BITCOIN_HISTORICAL":
-            return Object.assign({
-                state,
+            return {
+                ...state,
                 isFetching: true,
                 isComplete: false
-           })
-           break
+           }
 
        case "FETCH_BITCOIN_HISTORICAL_ERROR":
-           return Object.assign({
-               state,
+           return {
+               ...state,
                isFetching: false,
                isComplete: false,
                isError: action.payload
-           })
-           break
+           }
 
         case "FETCH_BITCOIN_HISTORICAL_COMPLETE":
-            return Object.assign({
-                state,
+            return {
+                ...state,
                 isFetching: false,
                 isComplete: true,
                 bitcoinHistorical: action.payload
-            })
-            break
+            }
+
+        default:
+            return state
     }
 
-    return state
 }
 
 

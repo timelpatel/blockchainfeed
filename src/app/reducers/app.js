@@ -19,18 +19,21 @@ const app = (state = {
 }, action) => {
 
     switch (action.type) {
-        case "SET_CURRENCY_VIEW":
+        case 'SET_CURRENCY_VIEW':
             return {
+                ...state,
                 currencyView: action.currencyView
             }
 
-        case "SET_MONEY_CODE":
+        case 'SET_MONEY_CODE':
             return {
+                ...state,
                 moneyCode: action.moneyCode
             }
-    }
 
-    return state
+        default:
+            return state
+    }
 }
 
 

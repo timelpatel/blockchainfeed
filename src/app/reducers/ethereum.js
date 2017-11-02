@@ -7,33 +7,32 @@ function ethereum(state = {
 
     switch (action.type) {
         case "FETCH_ETHEREUM":
-            return Object.assign({
-                state,
+            return {
+                ...state,
                 isFetching: true,
                 isComplete: false
-           })
-           break
+           }
 
        case "FETCH_ETHEREUM_ERROR":
-           return Object.assign({
-               state,
+           return {
+               ...state,
                isFetching: false,
                isComplete: false,
                isError: action.payload
-           })
-           break
+           }
 
         case "FETCH_ETHEREUM_COMPLETE":
-            return Object.assign({
-                state,
+            return {
+                ...state,
                 isFetching: false,
                 isComplete: true,
                 ethereum: action.payload
-            })
-            break
+            }
+
+        default:
+            return state
     }
 
-    return state
 }
 
 
