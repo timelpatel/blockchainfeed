@@ -2,7 +2,7 @@ import React, {Component} from 'react'
 import style from './style.scss'
 
 
-const BitcoinBadge = (props) => {
+const CurrencyBadge = (props) => {
 
     return (
         <table className='table__exchange-rates'>
@@ -17,11 +17,11 @@ const BitcoinBadge = (props) => {
             </thead>
             <tbody>
                 <tr>
-                    <td><strong>{props.bitcoinUsdLast}</strong></td>
-                    <td>{props.bitcoinUsdOpen}</td>
-                    <td>{props.bitcoinUsdHigh}</td>
-                    <td>{props.bitcoinUsdLow}</td>
-                    <td>{props.bitcoinUsdChange}</td>
+                    <td><strong>{props.currencyLast}</strong></td>
+                    <td>{props.currencyOpen}</td>
+                    <td>{props.currencyHigh}</td>
+                    <td>{props.currencyLow}</td>
+                    <td>{props.currencyChange}</td>
                 </tr>
             </tbody>
         </table>
@@ -30,4 +30,4 @@ const BitcoinBadge = (props) => {
 }
 
 
-export default BitcoinBadge
+export default CurrencyBadge

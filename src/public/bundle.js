@@ -28008,6 +28008,10 @@ var _index5 = __webpack_require__(309);
 
 var _index6 = _interopRequireDefault(_index5);
 
+var _index7 = __webpack_require__(332);
+
+var _index8 = _interopRequireDefault(_index7);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var Routes = function Routes() {
@@ -28016,7 +28020,8 @@ var Routes = function Routes() {
         null,
         _react2.default.createElement(_reactRouterDom.Route, { exact: true, path: '/', component: _index6.default }),
         _react2.default.createElement(_reactRouterDom.Route, { path: '/bitcoin', component: _index2.default }),
-        _react2.default.createElement(_reactRouterDom.Route, { path: '/ethereum', component: _index4.default })
+        _react2.default.createElement(_reactRouterDom.Route, { path: '/ethereum', component: _index4.default }),
+        _react2.default.createElement(_reactRouterDom.Route, { path: '/litecoin', component: _index8.default })
     );
 };
 
@@ -28104,21 +28109,21 @@ var BitcoinPage = function (_Component) {
                     'Data not available.'
                 ),
                 this.props.bitcoin.isComplete && this.props.app.moneyCode === 'gbp' && _react2.default.createElement(_index2.default, {
-                    bitcoinUsdLast: '£' + this.props.bitcoin.bitcoin.price.gbp.last.toFixed(2),
-                    bitcoinUsdOpen: this.props.bitcoin.bitcoin.price.gbp.open.toFixed(2),
-                    bitcoinUsdHigh: this.props.bitcoin.bitcoin.price.gbp.high.toFixed(2),
-                    bitcoinUsdLow: this.props.bitcoin.bitcoin.price.gbp.low.toFixed(2),
-                    bitcoinUsdChange: this.props.bitcoin.bitcoin.price.gbp.change + '%'
+                    currencyLast: '£' + this.props.bitcoin.bitcoin.price.gbp.last.toFixed(2),
+                    currencyOpen: this.props.bitcoin.bitcoin.price.gbp.open.toFixed(2),
+                    currencyHigh: this.props.bitcoin.bitcoin.price.gbp.high.toFixed(2),
+                    currencyLow: this.props.bitcoin.bitcoin.price.gbp.low.toFixed(2),
+                    currencyChange: this.props.bitcoin.bitcoin.price.gbp.change + '%'
                 }),
                 this.props.bitcoin.isComplete && this.props.app.moneyCode === 'usd' && _react2.default.createElement(_index2.default, {
-                    bitcoinUsdLast: '$' + this.props.bitcoin.bitcoin.price.usd.last.toFixed(2),
-                    bitcoinUsdOpen: this.props.bitcoin.bitcoin.price.usd.open.toFixed(2),
-                    bitcoinUsdHigh: this.props.bitcoin.bitcoin.price.usd.high.toFixed(2),
-                    bitcoinUsdLow: this.props.bitcoin.bitcoin.price.usd.low.toFixed(2),
-                    bitcoinUsdChange: this.props.bitcoin.bitcoin.price.usd.change + '%'
+                    currencyLast: '$' + this.props.bitcoin.bitcoin.price.usd.last.toFixed(2),
+                    currencyOpen: this.props.bitcoin.bitcoin.price.usd.open.toFixed(2),
+                    currencyHigh: this.props.bitcoin.bitcoin.price.usd.high.toFixed(2),
+                    currencyLow: this.props.bitcoin.bitcoin.price.usd.low.toFixed(2),
+                    currencyChange: this.props.bitcoin.bitcoin.price.usd.change + '%'
                 }),
                 _react2.default.createElement(_index4.default, {
-                    data: '../../../_stub/bitcoin-historical-data-static.json'
+                    data: '../../../_stub/btc-historical-data-static.json'
                 })
             );
         }
@@ -30265,7 +30270,7 @@ var _style2 = _interopRequireDefault(_style);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var BitcoinBadge = function BitcoinBadge(props) {
+var CurrencyBadge = function CurrencyBadge(props) {
 
     return _react2.default.createElement(
         'table',
@@ -30315,35 +30320,35 @@ var BitcoinBadge = function BitcoinBadge(props) {
                     _react2.default.createElement(
                         'strong',
                         null,
-                        props.bitcoinUsdLast
+                        props.currencyLast
                     )
                 ),
                 _react2.default.createElement(
                     'td',
                     null,
-                    props.bitcoinUsdOpen
+                    props.currencyOpen
                 ),
                 _react2.default.createElement(
                     'td',
                     null,
-                    props.bitcoinUsdHigh
+                    props.currencyHigh
                 ),
                 _react2.default.createElement(
                     'td',
                     null,
-                    props.bitcoinUsdLow
+                    props.currencyLow
                 ),
                 _react2.default.createElement(
                     'td',
                     null,
-                    props.bitcoinUsdChange
+                    props.currencyChange
                 )
             )
         )
     );
 };
 
-exports.default = BitcoinBadge;
+exports.default = CurrencyBadge;
 
 /***/ }),
 /* 296 */
@@ -47601,9 +47606,13 @@ var _reactRedux = __webpack_require__(35);
 
 var _ethereum = __webpack_require__(123);
 
-var _index = __webpack_require__(304);
+var _index = __webpack_require__(295);
 
 var _index2 = _interopRequireDefault(_index);
+
+var _index3 = __webpack_require__(299);
+
+var _index4 = _interopRequireDefault(_index3);
 
 var _style = __webpack_require__(307);
 
@@ -47652,9 +47661,22 @@ var EthereumPage = function (_Component) {
                     { style: _style2.default.bodyCopy },
                     'Data not available.'
                 ),
-                this.props.ethereum.isComplete && _react2.default.createElement(_index2.default, {
-                    ethereumUsdLast: this.props.ethereum.ethereum.price.usd.last.toFixed(2),
-                    ethereumGbpLast: this.props.ethereum.ethereum.price.gbp.last.toFixed(2)
+                this.props.ethereum.isComplete && this.props.app.moneyCode === 'gbp' && _react2.default.createElement(_index2.default, {
+                    currencyLast: '£' + this.props.ethereum.ethereum.price.gbp.last.toFixed(2),
+                    currencyOpen: this.props.ethereum.ethereum.price.gbp.open.toFixed(2),
+                    currencyHigh: this.props.ethereum.ethereum.price.gbp.high.toFixed(2),
+                    currencyLow: this.props.ethereum.ethereum.price.gbp.low.toFixed(2),
+                    currencyChange: this.props.ethereum.ethereum.price.gbp.change + '%'
+                }),
+                this.props.ethereum.isComplete && this.props.app.moneyCode === 'usd' && _react2.default.createElement(_index2.default, {
+                    currencyLast: '$' + this.props.ethereum.ethereum.price.usd.last.toFixed(2),
+                    currencyOpen: this.props.ethereum.ethereum.price.usd.open.toFixed(2),
+                    currencyHigh: this.props.ethereum.ethereum.price.usd.high.toFixed(2),
+                    currencyLow: this.props.ethereum.ethereum.price.usd.low.toFixed(2),
+                    currencyChange: this.props.ethereum.ethereum.price.usd.change + '%'
+                }),
+                _react2.default.createElement(_index4.default, {
+                    data: '../../../_stub/eth-historical-data-static.json'
                 })
             );
         }
@@ -47665,6 +47687,7 @@ var EthereumPage = function (_Component) {
 
 var mapStateToProps = function mapStateToProps(state) {
     return {
+        app: state.app,
         ethereum: state.ethereum,
         isComplete: state.isComplete,
         isError: state.isError,
@@ -47679,99 +47702,9 @@ var matchDispatchToProps = function matchDispatchToProps(dispatch) {
 exports.default = (0, _reactRedux.connect)(mapStateToProps, matchDispatchToProps)(EthereumPage);
 
 /***/ }),
-/* 304 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-    value: true
-});
-
-var _react = __webpack_require__(4);
-
-var _react2 = _interopRequireDefault(_react);
-
-var _style = __webpack_require__(305);
-
-var _style2 = _interopRequireDefault(_style);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-var EthereumBadge = function EthereumBadge(props) {
-
-    return _react2.default.createElement(
-        'div',
-        { className: 'container__blockCurrency' },
-        _react2.default.createElement(
-            'p',
-            { className: 'text__bodyCopy text__bold' },
-            'ETC / Etheteum'
-        ),
-        _react2.default.createElement(
-            'p',
-            { className: 'text__bodyCopy' },
-            '$',
-            props.ethereumUsdLast
-        ),
-        _react2.default.createElement(
-            'p',
-            { className: 'text__bodyCopy' },
-            '\xA3',
-            props.ethereumGbpLast
-        )
-    );
-};
-
-exports.default = EthereumBadge;
-
-/***/ }),
-/* 305 */
-/***/ (function(module, exports, __webpack_require__) {
-
-// style-loader: Adds some css to the DOM by adding a <style> tag
-
-// load the styles
-var content = __webpack_require__(306);
-if(typeof content === 'string') content = [[module.i, content, '']];
-// Prepare cssTransformation
-var transform;
-
-var options = {}
-options.transform = transform
-// add the styles to the DOM
-var update = __webpack_require__(18)(content, options);
-if(content.locals) module.exports = content.locals;
-// Hot Module Replacement
-if(false) {
-	// When the styles change, update the <style> tags
-	if(!content.locals) {
-		module.hot.accept("!!../../../../node_modules/css-loader/index.js!../../../../node_modules/sass-loader/lib/loader.js!./style.scss", function() {
-			var newContent = require("!!../../../../node_modules/css-loader/index.js!../../../../node_modules/sass-loader/lib/loader.js!./style.scss");
-			if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
-			update(newContent);
-		});
-	}
-	// When the module is disposed, remove the <style> tags
-	module.hot.dispose(function() { update(); });
-}
-
-/***/ }),
-/* 306 */
-/***/ (function(module, exports, __webpack_require__) {
-
-exports = module.exports = __webpack_require__(17)(undefined);
-// imports
-
-
-// module
-exports.push([module.i, ".container__blockCurrency {\n  background: #fff;\n  border-radius: 6px;\n  padding: 20px;\n  text-align: center;\n  width: 150px; }\n", ""]);
-
-// exports
-
-
-/***/ }),
+/* 304 */,
+/* 305 */,
+/* 306 */,
 /* 307 */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -49122,6 +49055,172 @@ exports = module.exports = __webpack_require__(17)(undefined);
 
 // module
 exports.push([module.i, "/*\n    Timelab Data\n    Base SASS\n*/\n/* http://meyerweb.com/eric/tools/css/reset/\n   v2.0 | 20110126\n   License: none (public domain)\n*/\nhtml, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, abbr, acronym, address, big, cite, code, del, dfn, em, img, ins, kbd, q, s, samp, small, strike, strong, sub, sup, tt, var, b, u, i, center, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td, article, aside, canvas, details, embed, figure, figcaption, footer, header, hgroup, menu, nav, output, ruby, section, summary, time, mark, audio, video {\n  margin: 0;\n  padding: 0;\n  border: 0;\n  font-size: 100%;\n  font: inherit;\n  vertical-align: baseline; }\n\narticle, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, section {\n  display: block; }\n\nbody {\n  line-height: 1; }\n\nol, ul {\n  list-style: none; }\n\nblockquote, q {\n  quotes: none; }\n\nblockquote:before, blockquote:after, q:before, q:after {\n  content: '';\n  content: none; }\n\ntable {\n  border-collapse: collapse;\n  border-spacing: 0; }\n\nh2.text__h2 {\n  color: #aaa;\n  font-family: arial-black;\n  font-size: 15px;\n  margin-bottom: 20px;\n  text-transform: uppercase; }\n\np.text__body-copy {\n  color: #363636;\n  font-size: 12px;\n  line-height: 2; }\n\n.text__bold,\nstrong {\n  font-weight: bold; }\n\na {\n  color: #09c;\n  text-decoration: none; }\n  a:hover {\n    text-decoration: none; }\n\n.text-hide {\n  position: absolute;\n  top: -9999px;\n  left: -9999px; }\n\n.form__form-group {\n  margin-bottom: 20px; }\n  .form__form-group:last-child {\n    margin-bottom: 0; }\n\n.form__select-field {\n  font-size: 17px; }\n\n.form__text-field {\n  font-size: 24px;\n  margin-right: 20px;\n  padding: 10px;\n  text-align: right;\n  width: 50%; }\n\ntable.table__exchange-rates {\n  background: #fff;\n  border-radius: 6px;\n  font-size: 12px;\n  text-align: center;\n  width: 100%; }\n  table.table__exchange-rates thead {\n    color: #aaa; }\n    table.table__exchange-rates thead th:first-child {\n      text-align: left; }\n    table.table__exchange-rates thead th {\n      border-bottom: 1px solid #efefef;\n      padding: 10px; }\n  table.table__exchange-rates tbody td:first-child {\n    text-align: left; }\n  table.table__exchange-rates tbody td {\n    padding: 10px; }\n\nbody {\n  background: #efefef;\n  font-family: verdana;\n  min-width: 480px; }\n\n.container__page {\n  margin: 20px; }\n", ""]);
+
+// exports
+
+
+/***/ }),
+/* 332 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _react = __webpack_require__(4);
+
+var _react2 = _interopRequireDefault(_react);
+
+var _redux = __webpack_require__(23);
+
+var _reactRedux = __webpack_require__(35);
+
+var _litecoin = __webpack_require__(310);
+
+var _index = __webpack_require__(295);
+
+var _index2 = _interopRequireDefault(_index);
+
+var _index3 = __webpack_require__(299);
+
+var _index4 = _interopRequireDefault(_index3);
+
+var _style = __webpack_require__(333);
+
+var _style2 = _interopRequireDefault(_style);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var LitecoinPage = function (_Component) {
+    _inherits(LitecoinPage, _Component);
+
+    function LitecoinPage() {
+        _classCallCheck(this, LitecoinPage);
+
+        return _possibleConstructorReturn(this, (LitecoinPage.__proto__ || Object.getPrototypeOf(LitecoinPage)).apply(this, arguments));
+    }
+
+    _createClass(LitecoinPage, [{
+        key: 'componentDidMount',
+        value: function componentDidMount() {
+            this.props.fetchLitecoin();
+        }
+    }, {
+        key: 'render',
+        value: function render() {
+            return _react2.default.createElement(
+                'div',
+                { className: 'container__page' },
+                _react2.default.createElement(
+                    'h2',
+                    { className: 'text__h2' },
+                    this.props.litecoin.isComplete && this.props.litecoin.litecoin.name,
+                    ' (',
+                    this.props.litecoin.isComplete && this.props.litecoin.litecoin.code,
+                    ')'
+                ),
+                this.props.litecoin.isFetching && _react2.default.createElement(
+                    'p',
+                    { style: _style2.default.bodyCopy },
+                    'Loading...'
+                ),
+                this.props.litecoin.isError && _react2.default.createElement(
+                    'p',
+                    { style: _style2.default.bodyCopy },
+                    'Data not available.'
+                ),
+                this.props.litecoin.isComplete && this.props.app.moneyCode === 'gbp' && _react2.default.createElement(_index2.default, {
+                    currencyLast: '£' + this.props.litecoin.litecoin.price.gbp.last.toFixed(2),
+                    currencyOpen: this.props.litecoin.litecoin.price.gbp.open.toFixed(2),
+                    currencyHigh: this.props.litecoin.litecoin.price.gbp.high.toFixed(2),
+                    currencyLow: this.props.litecoin.litecoin.price.gbp.low.toFixed(2),
+                    currencyChange: this.props.litecoin.litecoin.price.gbp.change + '%'
+                }),
+                this.props.litecoin.isComplete && this.props.app.moneyCode === 'usd' && _react2.default.createElement(_index2.default, {
+                    currencyLast: '$' + this.props.litecoin.litecoin.price.usd.last.toFixed(2),
+                    currencyOpen: this.props.litecoin.litecoin.price.usd.open.toFixed(2),
+                    currencyHigh: this.props.litecoin.litecoin.price.usd.high.toFixed(2),
+                    currencyLow: this.props.litecoin.litecoin.price.usd.low.toFixed(2),
+                    currencyChange: this.props.litecoin.litecoin.price.usd.change + '%'
+                }),
+                _react2.default.createElement(_index4.default, {
+                    data: '../../../_stub/ltc-historical-data-static.json'
+                })
+            );
+        }
+    }]);
+
+    return LitecoinPage;
+}(_react.Component);
+
+var mapStateToProps = function mapStateToProps(state) {
+    return {
+        app: state.app,
+        litecoin: state.litecoin,
+        isComplete: state.isComplete,
+        isError: state.isError,
+        isFetching: state.isFetching
+    };
+};
+
+var matchDispatchToProps = function matchDispatchToProps(dispatch) {
+    return (0, _redux.bindActionCreators)({ fetchLitecoin: _litecoin.fetchLitecoin }, dispatch);
+};
+
+exports.default = (0, _reactRedux.connect)(mapStateToProps, matchDispatchToProps)(LitecoinPage);
+
+/***/ }),
+/* 333 */
+/***/ (function(module, exports, __webpack_require__) {
+
+// style-loader: Adds some css to the DOM by adding a <style> tag
+
+// load the styles
+var content = __webpack_require__(334);
+if(typeof content === 'string') content = [[module.i, content, '']];
+// Prepare cssTransformation
+var transform;
+
+var options = {}
+options.transform = transform
+// add the styles to the DOM
+var update = __webpack_require__(18)(content, options);
+if(content.locals) module.exports = content.locals;
+// Hot Module Replacement
+if(false) {
+	// When the styles change, update the <style> tags
+	if(!content.locals) {
+		module.hot.accept("!!../../../../node_modules/css-loader/index.js!../../../../node_modules/sass-loader/lib/loader.js!./style.scss", function() {
+			var newContent = require("!!../../../../node_modules/css-loader/index.js!../../../../node_modules/sass-loader/lib/loader.js!./style.scss");
+			if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
+			update(newContent);
+		});
+	}
+	// When the module is disposed, remove the <style> tags
+	module.hot.dispose(function() { update(); });
+}
+
+/***/ }),
+/* 334 */
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__(17)(undefined);
+// imports
+
+
+// module
+exports.push([module.i, "", ""]);
 
 // exports
 

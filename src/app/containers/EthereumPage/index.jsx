@@ -2,7 +2,8 @@ import React, {Component} from 'react'
 import {bindActionCreators} from 'redux'
 import {connect} from 'react-redux'
 import {fetchEthereum} from '../../actions/ethereum.js'
-import EthereumBadge from '../../components/EthereumBadge/index.jsx'
+import CurrencyBadge from '../../components/CurrencyBadge/index.jsx'
+import LineGraph from '../../components/LineGraph/index.jsx'
 import style from './style.scss'
 
 
@@ -20,12 +21,28 @@ class EthereumPage extends Component {
 
                 {this.props.ethereum.isFetching && <p style={style.bodyCopy}>Loading...</p>}
                 {this.props.ethereum.isError && <p style={style.bodyCopy}>Data not available.</p>}
-                {this.props.ethereum.isComplete &&
-                    <EthereumBadge
-                        ethereumUsdLast={(this.props.ethereum.ethereum.price.usd.last).toFixed(2)}
-                        ethereumGbpLast={(this.props.ethereum.ethereum.price.gbp.last).toFixed(2)}
+                {this.props.ethereum.isComplete && this.props.app.moneyCode === 'gbp' &&
+                    <CurrencyBadge
+                        currencyLast={'£' + (this.props.ethereum.ethereum.price.gbp.last).toFixed(2)}
+                        currencyOpen={(this.props.ethereum.ethereum.price.gbp.open).toFixed(2)}
+                        currencyHigh={(this.props.ethereum.ethereum.price.gbp.high).toFixed(2)}
+                        currencyLow={(this.props.ethereum.ethereum.price.gbp.low).toFixed(2)}
+                        currencyChange={(this.props.ethereum.ethereum.price.gbp.change) + '%'}
                     />
                 }
+                {this.props.ethereum.isComplete && this.props.app.moneyCode === 'usd' &&
+                    <CurrencyBadge
+                        currencyLast={'$' + (this.props.ethereum.ethereum.price.usd.last).toFixed(2)}
+                        currencyOpen={(this.props.ethereum.ethereum.price.usd.open).toFixed(2)}
+                        currencyHigh={(this.props.ethereum.ethereum.price.usd.high).toFixed(2)}
+                        currencyLow={(this.props.ethereum.ethereum.price.usd.low).toFixed(2)}
+                        currencyChange={(this.props.ethereum.ethereum.price.usd.change) + '%'}
+                    />
+                }
+
+                <LineGraph
+                    data='../../../_stub/eth-historical-data-static.json'
+                />
             </div>
 
         )
@@ -36,6 +53,7 @@ class EthereumPage extends Component {
 
 const mapStateToProps = (state) => {
     return {
+        app: state.app,
         ethereum: state.ethereum,
         isComplete: state.isComplete,
         isError: state.isError,
